@@ -6,14 +6,22 @@ from .models import Comment
 
 class CommentDetailSerializer(serializers.ModelSerializer):
     date = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
+    user = serializers.SlugRelatedField(slug_field='username', queryset=User.objects.all(), write_only=True)
+    nickname = serializers.SerializerMethodField()
+
+    def get_nickname(self, comment):
+        has_name = comment.user.first_name and comment.user.last_name
+        return "%s %s" % (comment.user.first_name,
+                          comment.user.last_name) \
+            if has_name else comment.user.username
 
     class Meta:
         model = Comment
         fields = [
             'user',
+            'nickname',
             'text',
             'date',
-            'url'
         ]
 
 

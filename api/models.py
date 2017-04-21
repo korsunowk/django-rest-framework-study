@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils.timezone import datetime
 
 # Create your models here.
 
@@ -11,7 +10,7 @@ class Comment(models.Model):
                             default=None,
                             blank=False,
                             null=False)
-    date = models.DateTimeField(auto_now_add=True, editable=False)
+    date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return "{0}: {1}".format(self.user.username, self.text)

@@ -18,14 +18,15 @@ from .models import Comment
 
 
 class CommentSerializer(serializers.ModelSerializer):
-    date = serializers.DateTimeField(format="%Y-%m-%d")
+    date = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
 
     class Meta:
         model = Comment
         fields = [
             'user',
             'text',
-            'date'
+            'date',
+            'url'
         ]
 
 

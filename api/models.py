@@ -11,7 +11,7 @@ class Comment(models.Model):
                             default=None,
                             blank=False,
                             null=False)
-    date = models.DateTimeField(default=datetime.now)
+    date = models.DateTimeField(auto_now_add=True, editable=False)
 
     def __str__(self):
         return "{0}: {1}".format(self.user.username, self.text)

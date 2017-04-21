@@ -23,6 +23,7 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = [
+            'user',
             'text',
             'date'
         ]
@@ -47,5 +48,11 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
 
+class CommentViewSet(viewsets.ModelViewSet):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+
+
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
+router.register(r'comments', CommentViewSet)

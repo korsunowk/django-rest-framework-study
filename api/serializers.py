@@ -99,6 +99,9 @@ class UserSerializer(serializers.ModelSerializer):
     subject_name = serializers.SerializerMethodField()
 
     def get_subject_name(self, user):
+        """
+            Return subject name if exists
+        """
         return user.subject.first().name if user.subject.first() else None
 
     class Meta:

@@ -2,8 +2,6 @@ from rest_framework import serializers, viewsets, routers
 from django.contrib.auth.models import User
 from rest_framework_recursive.fields import RecursiveField
 from rest_framework.permissions import IsAdminUser, BasePermission
-from rest_framework import status
-from rest_framework.response import Response
 
 from .models import Comment, Subject
 
@@ -98,12 +96,17 @@ class UserSerializer(serializers.ModelSerializer):
         Serializer for list of users display
     """
     comments = CommentSerializer(many=True, read_only=True)
+    subject_name = serializers.SerializerMethodField()
+
+    def get_subject_name(self, user):
+        return user.subject.first().name if user.subject.first() else None
 
     class Meta:
         model = User
         fields = [
             'id',
             'username',
+            'subject_name',
             'email',
             'url',
             'comments'
@@ -116,12 +119,18 @@ class UserDetailWithoutPasswordSerializer(serializers.ModelSerializer):
     """
     first_name = serializers.CharField()
     last_name = serializers.CharField()
+    subject_name = serializers.SerializerMethodField()
+
+    def get_subject_name(self, user):
+        return user.subject.first().name if user.subject.first() else None
 
     class Meta:
         model = User
         fields = [
             'id',
             'username',
+            'subject_name',
+            'subject',
             'email',
             'first_name',
             'last_name',
@@ -142,6 +151,7 @@ class UserCreateSerializer(UserDetailWithoutPasswordSerializer):
         fields = [
             'id',
             'username',
+            'subject',
             'email',
             'first_name',
             'last_name',

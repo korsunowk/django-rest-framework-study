@@ -1,6 +1,7 @@
 from rest_framework import serializers, viewsets, routers
 from django.contrib.auth.models import User
 from rest_framework_recursive.fields import RecursiveField
+from rest_framework.permissions import IsAdminUser
 from .models import Comment
 
 
@@ -106,6 +107,11 @@ class UserViewSet(viewsets.ModelViewSet):
         if is_object:
             return UserDetailWithoutPasswordSerializer
         return UserCreateSerializer
+
+    def get_permissions(self):
+        if self.request.method in ['PUT', 'DELETE']:
+            return [IsAdminUser()]
+        return super(UserViewSet, self).get_permissions()
 
 
 class CommentViewSet(viewsets.ModelViewSet):

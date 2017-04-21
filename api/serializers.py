@@ -56,7 +56,7 @@ class UserSerializer(serializers.ModelSerializer):
         ]
 
 
-class UserDetailSerializer(serializers.ModelSerializer):
+class UserDetailWithoutPasswordSerializer(serializers.ModelSerializer):
     first_name = serializers.CharField()
     last_name = serializers.CharField()
 
@@ -72,14 +72,40 @@ class UserDetailSerializer(serializers.ModelSerializer):
         ]
 
 
+class UserCreateSerializer(UserDetailWithoutPasswordSerializer):
+    password = serializers.CharField(style={'input_type': 'password'}, write_only=True)
+
+    class Meta:
+        model = User
+        fields = [
+            'id',
+            'username',
+            'email',
+            'first_name',
+            'last_name',
+            'is_staff',
+            'password'
+        ]
+
+
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
     def get_serializer_class(self):
+        is_object = False
+        try:
+            self.get_object()
+            is_object = True
+        except AssertionError:
+            pass
+
         if self.action == 'list':
             return UserSerializer
-        return UserDetailSerializer
+
+        if is_object:
+            return UserDetailWithoutPasswordSerializer
+        return UserCreateSerializer
 
 
 class CommentViewSet(viewsets.ModelViewSet):

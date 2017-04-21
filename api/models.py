@@ -11,6 +11,7 @@ class Comment(models.Model):
                             blank=False,
                             null=False)
     date = models.DateTimeField(auto_now_add=True)
+    parent = models.ForeignKey('self', default=None, blank=True, null=True)
 
     def __str__(self):
         return "{0}: {1}".format(self.user.username, self.text)

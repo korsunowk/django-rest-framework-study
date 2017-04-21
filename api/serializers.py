@@ -1,6 +1,6 @@
 from rest_framework import serializers, viewsets, routers
 from django.contrib.auth.models import User
-
+from rest_framework_recursive.fields import RecursiveField
 from .models import Comment
 
 
@@ -24,18 +24,21 @@ class CommentDetailSerializer(serializers.ModelSerializer):
             'nickname',
             'text',
             'date',
+            'parent'
         ]
 
 
 class CommentSerializer(serializers.ModelSerializer):
     date = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
+    parent = RecursiveField()
 
     class Meta:
         model = Comment
         fields = [
             'text',
             'date',
-            'url'
+            'url',
+            'parent'
         ]
 
 

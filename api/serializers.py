@@ -1,8 +1,16 @@
 from rest_framework import serializers, viewsets, routers
 from django.contrib.auth.models import User
 from rest_framework_recursive.fields import RecursiveField
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser, BasePermission
 from .models import Comment
+
+
+class IsAuthorOfComment(BasePermission):
+    """
+        Custom permission to check "this user is author of that comment?"
+    """
+    def has_object_permission(self, request, view, obj):
+        return request.user == obj.user
 
 
 class CommentDetailSerializer(serializers.ModelSerializer):
@@ -153,6 +161,16 @@ class CommentViewSet(viewsets.ModelViewSet):
             return CommentSerializer
         return CommentDetailSerializer
 
+    def get_permissions(self):
+        """
+            Check request methods for give access to delete/change comments
+            to authors
+        :return: True if is author of message and False if not 
+        """
+
+        if self.request.method in ['PUT', 'DELETE']:
+            return [IsAuthorOfComment()]
+        return super(CommentViewSet, self).get_permissions()
 
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)

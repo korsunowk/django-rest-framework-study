@@ -6,7 +6,9 @@ from .models import Comment
 
 class CommentDetailSerializer(serializers.ModelSerializer):
     date = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
-    user = serializers.SlugRelatedField(slug_field='username', queryset=User.objects.all(), write_only=True)
+    user = serializers.SlugRelatedField(slug_field='username',
+                                        queryset=User.objects.all(),
+                                        write_only=True)
     nickname = serializers.SerializerMethodField()
 
     def get_nickname(self, comment):

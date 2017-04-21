@@ -6,6 +6,9 @@ from .models import Comment
 
 
 class CommentDetailSerializer(serializers.ModelSerializer):
+    """
+        Serializer for one comment object display
+    """
     date = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
     user = serializers.SlugRelatedField(slug_field='username',
                                         queryset=User.objects.all(),
@@ -30,6 +33,9 @@ class CommentDetailSerializer(serializers.ModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
+    """
+        Serializer for list of comments display
+    """
     date = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
     parent = RecursiveField()
 
@@ -44,6 +50,9 @@ class CommentSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
+    """
+        Serializer for list of users display
+    """
     comments = CommentSerializer(many=True, read_only=True)
 
     class Meta:
@@ -58,6 +67,9 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class UserDetailWithoutPasswordSerializer(serializers.ModelSerializer):
+    """
+        Serializer for display detail info about user without password
+    """
     first_name = serializers.CharField()
     last_name = serializers.CharField()
 
@@ -74,7 +86,12 @@ class UserDetailWithoutPasswordSerializer(serializers.ModelSerializer):
 
 
 class UserCreateSerializer(UserDetailWithoutPasswordSerializer):
-    password = serializers.CharField(style={'input_type': 'password'}, write_only=True)
+    """
+        Serializer for display form to create user with password
+    """
+    password = serializers.CharField(
+        style={'input_type': 'password'},
+        write_only=True)
 
     class Meta:
         model = User
@@ -90,16 +107,22 @@ class UserCreateSerializer(UserDetailWithoutPasswordSerializer):
 
 
 class UserViewSet(viewsets.ModelViewSet):
+    """
+        Default view model for display all/one users
+    """
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
     def get_serializer_class(self):
-        is_object = False
+        """
+            Method check is list or detail view and 
+            return different serializers
+        :return: Some serializer
+        """
         try:
-            self.get_object()
-            is_object = True
+            is_object = self.get_object()  # check it's detail or list view
         except AssertionError:
-            pass
+            is_object = False
 
         if self.action == 'list':
             return UserSerializer
@@ -109,12 +132,19 @@ class UserViewSet(viewsets.ModelViewSet):
         return UserCreateSerializer
 
     def get_permissions(self):
+        """
+            Check request method and get some permissions
+        :return: Some permissions classes
+        """
         if self.request.method in ['PUT', 'DELETE']:
             return [IsAdminUser()]
         return super(UserViewSet, self).get_permissions()
 
 
 class CommentViewSet(viewsets.ModelViewSet):
+    """
+        Default comment view with different serializers for different actions
+    """
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
 

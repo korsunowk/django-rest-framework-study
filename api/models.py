@@ -5,6 +5,9 @@ from django.contrib.auth.models import User
 
 
 class Comment(models.Model):
+    """
+        Model for tree structure comment objects
+    """
     user = models.ForeignKey(User, related_name='comments')
     text = models.CharField(max_length=255,
                             default=None,

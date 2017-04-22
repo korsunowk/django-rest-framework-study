@@ -1,5 +1,5 @@
 from django.conf.urls import url, include
-from .serializers import router
+from api.routers import router
 
 
 urlpatterns = [

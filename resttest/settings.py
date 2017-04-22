@@ -28,21 +28,27 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
-# Application definition
-
-INSTALLED_APPS = [
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    'api.apps.ApiConfig',
-
-    'rest_framework',
-    'rest_framework_recursive'
 ]
+THIRD_PARTY_APPS = [
+    'rest_framework',  # Django rest framework
+    'rest_framework_recursive',  # Recursive fields for DRF serializers
+]
+
+# Apps specific for this project go here.
+LOCAL_APPS = [
+    'api.apps.ApiConfig'
+]
+
+# Application definition
+
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

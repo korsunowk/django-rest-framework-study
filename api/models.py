@@ -5,6 +5,9 @@ from django.contrib.auth.models import User
 
 
 class Subject(models.Model):
+    """
+        Model for comment and user subject
+    """
     name = models.CharField(max_length=255, default=None)
     user = models.ForeignKey(User, related_name='subject', default=None,
                              null=True, blank=True)

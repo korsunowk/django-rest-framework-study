@@ -10,7 +10,7 @@ class Subject(models.Model):
     """
     name = models.CharField(max_length=255, default=None)
     user = models.ForeignKey(User, related_name='subject', default=None,
-                             null=True, blank=True)
+                             null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.name

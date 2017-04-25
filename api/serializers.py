@@ -26,11 +26,12 @@ class CommentDetailSerializer(serializers.ModelSerializer):
                                         write_only=True)
     nickname = serializers.SerializerMethodField()
     subject_name = serializers.SerializerMethodField()  # for display
-    subject = serializers.SlugRelatedField(slug_field='name',
+    subject = serializers.SlugRelatedField(slug_field='pk',
                                            queryset=Subject.objects.all(),
                                            write_only=True)  # for add/edit
 
-    def get_nickname(self, comment):
+    @staticmethod
+    def get_nickname(comment):
         """
             Method for get first and last name of user. 
             If he/she haven't name, then return username
@@ -42,10 +43,11 @@ class CommentDetailSerializer(serializers.ModelSerializer):
                           comment.user.last_name) \
             if has_name else comment.user.username
 
-    def get_subject_name(self, comment):
+    @staticmethod
+    def get_subject_name(comment):
         """
             Get and return subject name
-            
+
         :return: Subject name in string form
         """
         return comment.subject.name
@@ -69,7 +71,7 @@ class CommentSerializer(serializers.ModelSerializer):
     """
     date = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
     parent = RecursiveField()
-    subject = SubjectSerializer()
+    subject = serializers.ReadOnlyField(source='subject.name')
 
     class Meta:
         model = Comment
@@ -89,7 +91,8 @@ class UserSerializer(serializers.ModelSerializer):
     comments = CommentSerializer(many=True, read_only=True)
     subject_name = serializers.SerializerMethodField()
 
-    def get_subject_name(self, user):
+    @staticmethod
+    def get_subject_name(user):
         """
             Return subject name if exists
         """
@@ -114,9 +117,35 @@ class UserDetailWithoutPasswordSerializer(serializers.ModelSerializer):
     first_name = serializers.CharField()
     last_name = serializers.CharField()
     subject_name = serializers.SerializerMethodField()
+    subject = serializers.SlugRelatedField(slug_field='pk',
+                                           queryset=Subject.objects.all(),
+                                           write_only=True)  # for add/edit
 
-    def get_subject_name(self, user):
+    @staticmethod
+    def get_subject_name(user):
+        """
+            Return subject name if user have subject
+        :param user: serialized user
+        :return: Subject name if user have got subject 
+        """
         return user.subject.first().name if user.subject.first() else None
+
+    def update(self, instance, validated_data):
+        """
+            Override update method for update subject object
+        :param instance: serialized user
+        :param validated_data: new checked data
+        :return: updated instance
+        """
+        for attr, value in validated_data.items():
+            if isinstance(value, Subject):
+                instance.subject.clear()
+                instance.subject.add(value)
+            else:
+                setattr(instance, attr, value)
+        instance.save()
+
+        return instance
 
     class Meta:
         model = User
@@ -139,6 +168,22 @@ class UserCreateSerializer(UserDetailWithoutPasswordSerializer):
     password = serializers.CharField(
         style={'input_type': 'password'},
         write_only=True)
+    subject = serializers.SlugRelatedField(slug_field='pk',
+                                           queryset=Subject.objects.all(),
+                                           write_only=True)  # for add/edit
+
+    def create(self, validated_data):
+        """
+            Create user and add subject to them
+        :param validated_data: 
+        :return: new user instance
+        """
+        subject = validated_data.pop('subject')
+        instance = User.objects.create(
+            **validated_data
+        )
+        instance.subject.add(subject)
+        return instance
 
     class Meta:
         model = User

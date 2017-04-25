@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import viewsets
 from rest_framework.permissions import IsAdminUser
+from rest_framework.response import Response
 
 from .permissions import IsAuthorOfComment
 from .models import Subject, Comment
@@ -58,6 +59,22 @@ class CommentViewSet(viewsets.ModelViewSet):
     """
     queryset = Comment.objects.all()
     serializer_class = serializers.CommentSerializer
+
+    def list(self, request, *args, **kwargs):
+        """
+            Returns a list of comments of the same 
+            subject as the subject of the user
+            
+        :param request: 
+        :param args: 
+        :param kwargs: 
+        :return: response with new queryset
+        """
+        queryset = Comment.objects.filter(subject=request.user.subject.first())
+        serializer = \
+            serializers.CommentSerializer(queryset, many=True,
+                                          context={'request': request})
+        return Response(serializer.data)
 
     def get_serializer_class(self):
         if self.action == 'list':

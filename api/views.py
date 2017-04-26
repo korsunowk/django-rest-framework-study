@@ -13,6 +13,15 @@ from api import serializers
 class SubjectViewSet(viewsets.ModelViewSet):
     """
         Default view model for display subjects
+        
+        list:
+        Return all subjects
+        
+        post:
+        Create a new subject
+        
+        retrieve:
+        Return the given subject
     """
     queryset = Subject.objects.all()
     serializer_class = serializers.SubjectSerializer
@@ -21,6 +30,15 @@ class SubjectViewSet(viewsets.ModelViewSet):
 class UserViewSet(viewsets.ModelViewSet):
     """
         Default view model for display all/one users
+        
+        list:
+        Return all users in system
+        
+        post:
+        Create a new user
+        
+        retrieve:
+        Return the given user
     """
     queryset = User.objects.all()
     serializer_class = serializers.UserSerializer
@@ -56,6 +74,16 @@ class UserViewSet(viewsets.ModelViewSet):
 class CommentViewSet(viewsets.ModelViewSet):
     """
         Default comment view with different serializers for different actions
+        
+        list:
+        Return all comments to anonymous user or return comment 
+        with as same subject as authenticated user subject
+        
+        post:
+        Create a new comment
+        
+        retrieve:
+        Return the given comment
     """
     queryset = Comment.objects.all()
     serializer_class = serializers.CommentSerializer

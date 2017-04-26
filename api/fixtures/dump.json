@@ -1,0 +1,23 @@
+[
+  {
+    "model": "api.Subject",
+    "pk": 1,
+    "fields": {
+      "name": "Python"
+    }
+  },
+  {
+    "model": "api.Subject",
+    "pk": 2,
+    "fields": {
+      "name": "Math"
+    }
+  },
+  {
+    "model": "api.Subject",
+    "pk": 3,
+    "fields": {
+      "name": "History"
+    }
+  }
+]

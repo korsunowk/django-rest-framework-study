@@ -1,7 +1,10 @@
 from django.shortcuts import reverse
+from django.contrib.auth.models import User
+
 from rest_framework.test import APITestCase, APIClient
 from rest_framework import status
-from django.contrib.auth.models import User
+
+from api.models import Subject
 
 # Create your tests here.
 
@@ -10,6 +13,8 @@ class CreateUserForTestMixin(APITestCase):
     """
     Mixin for add initial users to all subtests 
     """
+    fixtures = ['dump.json', ]
+
     def setUp(self):
         """
         Create users with initial data to test database, 
@@ -24,6 +29,8 @@ class CreateUserForTestMixin(APITestCase):
             first_name="Super",
             last_name="User"
         )
+        self.super_user.subject.add(Subject.objects.get(name='Python'))
+
         self.common_user = User.objects.create(
             username="commonuser",
             password="password123",
@@ -31,6 +38,7 @@ class CreateUserForTestMixin(APITestCase):
             first_name="Common",
             last_name="User"
         )
+        self.common_user.subject.add(Subject.objects.get(name='History'))
 
 
 class UserTest(CreateUserForTestMixin):
@@ -77,4 +85,16 @@ class PermissionTest(CreateUserForTestMixin):
         # check try to update user by anonymous user
         response = self.client.put(detail_url,
                                    data={'username': 'not-superuser'})
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_subjects_list(self):
+        """
+        Test for get access to display subjects and create new, if authorised
+        """
+        url = reverse('subject-list')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 3)  # check count of fixtures
+
+        response = self.client.post(url, data={'name': 'Test'})
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)

@@ -103,6 +103,21 @@ class PermissionTest(CreateUserForTestMixin):
         response = self.client.post(url, data={'name': 'Test'})
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
+        # try to add new subject by common user
+        self.client.force_login(user=self.common_user)
+        response = self.client.post(url, data={'name': 'Test'})
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+        # try to update new subject by common user
+        detail_url = reverse('subject-detail',
+                             kwargs={'pk': Subject.objects.last().pk})
+        response = self.client.put(detail_url, data={'name': 'new name'})
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        # try to delete new subject by common user
+        response = self.client.delete(detail_url)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
     def test_comments_list(self):
         """
         Test for get all comments if user is anonymous 

@@ -96,5 +96,6 @@ class PermissionTest(CreateUserForTestMixin):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 3)  # check count of fixtures
 
+        # try to add new subject by anonymous user
         response = self.client.post(url, data={'name': 'Test'})
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)

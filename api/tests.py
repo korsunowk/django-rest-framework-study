@@ -34,6 +34,9 @@ class CreateUserForTestMixin(APITestCase):
 
 
 class UserTest(CreateUserForTestMixin):
+    """
+    Test for users
+    """
     def test_create_user(self):
         """
             Ensure we can create new user object        
@@ -42,3 +45,36 @@ class UserTest(CreateUserForTestMixin):
         self.assertEqual(User.objects.filter(is_staff=True).count(), 1)
         self.assertEqual(
             User.objects.get(is_staff=False).username, "commonuser")
+        url = reverse('user-list')
+        response = self.client.get(url)
+        response_data = response.data
+        self.assertEqual(len(response_data), 2)
+
+
+class PermissionTest(CreateUserForTestMixin):
+    """
+    Test for check permission of users to any pages of API
+    """
+    def test_users_list(self):
+        """
+        Ensure we can't add or edit any data by anonymous user
+        """
+        list_url = reverse('user-list')
+        detail_url = reverse('user-detail', kwargs={'pk': 1})
+
+        # check get all user list
+        response = self.client.get(list_url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        # check get first user
+        response = self.client.get(detail_url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        # check try to add new user by anonymous user
+        response = self.client.post(list_url)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+        # check try to update user by anonymous user
+        response = self.client.put(detail_url,
+                                   data={'username': 'not-superuser'})
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)

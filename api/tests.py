@@ -141,3 +141,13 @@ class PermissionTest(CreateUserForTestMixin):
         self.assertEqual(len(response.data), 1)
         self.assertEqual(response.data[0]['subject'],
                          self.common_user.subject.first().name)
+
+        # try to update comment by common user
+        detail_url = response.data[0]['url']
+        response = self.client.patch(detail_url,
+                                     data={'text': 'Updated comment'})
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        # try to delete comment by common user
+        response = self.client.delete(detail_url)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)

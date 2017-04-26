@@ -1,5 +1,6 @@
 from django.shortcuts import reverse
 from django.contrib.auth.models import User
+from django.core.management import call_command
 
 from rest_framework.test import APITestCase, APIClient
 from rest_framework import status
@@ -13,7 +14,7 @@ class CreateUserForTestMixin(APITestCase):
     """
     Mixin for add initial users to all subtests 
     """
-    fixtures = ['dump.json', ]
+    fixtures = ['subjects.json', ]
 
     def setUp(self):
         """
@@ -39,6 +40,8 @@ class CreateUserForTestMixin(APITestCase):
             last_name="User"
         )
         self.common_user.subject.add(Subject.objects.get(name='History'))
+        # load comments for users
+        call_command('loaddata', 'comments.json')
 
 
 class UserTest(CreateUserForTestMixin):
@@ -99,3 +102,13 @@ class PermissionTest(CreateUserForTestMixin):
         # try to add new subject by anonymous user
         response = self.client.post(url, data={'name': 'Test'})
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_comments_list(self):
+        """
+        Test for get all comments if user is anonymous 
+        or with same subject as subject in user
+        """
+        url = reverse('comment-list')
+        response = self.client.get(url)
+        self.assertEqual(len(response.data), 3)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)

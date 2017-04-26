@@ -1,0 +1,32 @@
+[
+  {
+    "model": "api.Comment",
+    "pk": 1,
+    "fields": {
+      "text": "Python comment",
+      "user": 1,
+      "subject": 1,
+      "date": "2017-04-27"
+    }
+  },
+  {
+    "model": "api.Comment",
+    "pk": 2,
+    "fields": {
+      "text": "Python comment",
+      "user": 1,
+      "subject": 1,
+      "date": "2017-04-27"
+    }
+  },
+  {
+    "model": "api.Comment",
+    "pk": 3,
+    "fields": {
+      "text": "History comment",
+      "user": 2,
+      "subject": 3,
+      "date": "2017-04-27"
+    }
+  }
+]

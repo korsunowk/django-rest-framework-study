@@ -112,3 +112,17 @@ class PermissionTest(CreateUserForTestMixin):
         response = self.client.get(url)
         self.assertEqual(len(response.data), 3)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        # get comments with subject the same as user subject
+        self.client.force_authenticate(user=self.super_user)
+        response = self.client.get(url)
+        self.assertEqual(len(response.data), 2)
+        self.assertEqual(response.data[0]['subject'],
+                         self.super_user.subject.first().name)
+        self.client.logout()
+        # get comments with another subject as same as common_user subject
+        self.client.force_login(user=self.common_user)
+        response = self.client.get(url)
+        self.assertEqual(len(response.data), 1)
+        self.assertEqual(response.data[0]['subject'],
+                         self.common_user.subject.first().name)

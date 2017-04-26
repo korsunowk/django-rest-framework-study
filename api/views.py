@@ -70,7 +70,12 @@ class CommentViewSet(viewsets.ModelViewSet):
         :param kwargs: 
         :return: response with new queryset
         """
-        queryset = Comment.objects.filter(subject=request.user.subject.first())
+        if request.user.is_authenticated():
+            queryset = \
+                Comment.objects.filter(subject=request.user.subject.first())
+        else:
+            queryset = Comment.objects.all()
+
         serializer = \
             serializers.CommentSerializer(queryset, many=True,
                                           context={'request': request})

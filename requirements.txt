@@ -8,4 +8,5 @@ packaging==16.8
 pkg-resources==0.0.0
 pyparsing==2.2.0
 pytz==2017.2
+selenium==3.4.0
 six==1.10.0

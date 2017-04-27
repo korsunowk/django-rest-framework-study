@@ -4,7 +4,6 @@ from django.core.management import call_command
 
 from rest_framework.test import APITestCase, APIClient
 from rest_framework import status
-
 from api.models import Subject
 
 # Create your tests here.
@@ -151,3 +150,66 @@ class PermissionTest(CreateUserForTestMixin):
         # try to delete comment by common user
         response = self.client.delete(detail_url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+
+class SeleniumTest(CreateUserForTestMixin):
+    """
+    Test with selenium
+    """
+    @staticmethod
+    def test_browser():
+        import os
+        from selenium import webdriver
+        import time
+
+        # add browser driver
+        chromedriver = "/home/base/Загрузки/chromedriver"
+        os.environ["webdriver.chrome.driver"] = chromedriver
+        # start chrome browser
+        driver = webdriver.Chrome(chromedriver)
+        driver.get("http://127.0.0.1:8000")
+        driver.get("http://127.0.0.1:8000/users/")
+        driver.get("http://127.0.0.1:8000/comments/")
+        driver.get("http://127.0.0.1:8000/subjects/")
+        # login with standard login/pass
+        driver.get("http://127.0.0.1:8000/api-auth/login/?next=/")
+        username = driver.find_element_by_id("id_username")
+        password = driver.find_element_by_id("id_password")
+
+        username.send_keys("admin")
+        password.send_keys("admin")
+
+        driver.find_element_by_name("submit").click()
+        driver.get("http://127.0.0.1:8000/subjects")
+        # custom script for switch tab in bottom menu
+        driver.execute_script("""
+        $("a[href='#post-generic-content-form'").click();
+        """)
+        # fill content input for add new subject
+        content = driver.find_element_by_id("id__content")
+        content.clear()
+        content.send_keys("""
+            {
+                "name": "NEW"
+            }
+        """)
+        # find submit button for add new subject
+        driver.execute_script("""
+$("button[title='Make a POST request on the Subject List resource']").click();
+                """)
+        # go to detail page with new subject
+        driver.execute_script("""
+            var pk = $("span.lit:last").text();
+            window.location = "http://127.0.0.1:8000/subjects/" + pk;
+        """)
+        # find two delete buttons
+        # first for display pop-up alert
+        # second for last step delete item
+        delete_button = driver.find_elements_by_class_name('btn-danger')
+        delete_button[0].click()
+        # delay 1 second for display modal page with second delete button
+        time.sleep(1)
+        delete_button[1].click()
+        # check deleted item
+        driver.get("http://127.0.0.1:8000/subjects/")
+        time.sleep(1)

@@ -45,7 +45,7 @@ class CommentDetailSerializer(serializers.ModelSerializer):
     @staticmethod
     def get_nickname(comment):
         """
-            Method for get first and last name of user. 
+            Method for get first and last name of user.
             If he/she haven't name, then return username
 
         :return: First_name last_name or username
@@ -138,7 +138,7 @@ class UserDetailWithoutPasswordSerializer(serializers.ModelSerializer):
         """
             Return subject name if user have subject
         :param user: serialized user
-        :return: Subject name if user have got subject 
+        :return: Subject name if user have got subject
         """
         return user.subject.first().name if user.subject.first() else None
 
@@ -187,7 +187,6 @@ class UserCreateSerializer(UserDetailWithoutPasswordSerializer):
     def create(self, validated_data):
         """
             Create user and add subject to them
-        :param validated_data: 
         :return: new user instance
         """
         subject = validated_data.pop('subject')

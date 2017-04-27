@@ -14,13 +14,13 @@ from api import serializers
 class SubjectViewSet(viewsets.ModelViewSet):
     """
         Default view model for display subjects
-        
+
         list:
         Return all subjects
-        
+
         post:
         Create a new subject
-        
+
         retrieve:
         Return the given subject
     """
@@ -30,7 +30,7 @@ class SubjectViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         """
         Override create method for serialize subject with detail serializer
-        
+
         :return: response with detail data of new subject
         """
         serializer = serializers.DetailSubjectSerializer(data=request.data)
@@ -46,13 +46,13 @@ class SubjectViewSet(viewsets.ModelViewSet):
 class UserViewSet(viewsets.ModelViewSet):
     """
         Default view model for display all/one users
-        
+
         list:
         Return all users in system
-        
+
         post:
         Create a new user
-        
+
         retrieve:
         Return the given user
     """
@@ -90,14 +90,14 @@ class UserViewSet(viewsets.ModelViewSet):
 class CommentViewSet(viewsets.ModelViewSet):
     """
         Default comment view with different serializers for different actions
-        
+
         list:
-        Return all comments to anonymous user or return comment 
+        Return all comments to anonymous user or return comment
         with as same subject as authenticated user subject
-        
+
         post:
         Create a new comment
-        
+
         retrieve:
         Return the given comment
     """
@@ -106,12 +106,9 @@ class CommentViewSet(viewsets.ModelViewSet):
 
     def list(self, request, *args, **kwargs):
         """
-            Returns a list of comments of the same 
+            Returns a list of comments of the same
             subject as the subject of the user
-            
-        :param request: 
-        :param args: 
-        :param kwargs: 
+
         :return: response with new queryset
         """
         if request.user.is_authenticated():

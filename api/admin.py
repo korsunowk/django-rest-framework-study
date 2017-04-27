@@ -1,10 +1,16 @@
 from django.contrib import admin
-from .models import Comment
+from .models import Comment, Subject
 
 # Register your models here.
 
 
-class AdminComment(admin.ModelAdmin):
+class CommentAdmin(admin.ModelAdmin):
     list_display = ['user', 'text', 'date']
 
-admin.site.register(Comment, AdminComment)
+
+class SubjectAdmin(admin.ModelAdmin):
+    list_display = ['name']
+
+
+admin.site.register(Comment, CommentAdmin)
+admin.site.register(Subject, SubjectAdmin)

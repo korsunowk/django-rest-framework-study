@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from rest_framework import viewsets
 from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
+from rest_framework import status
 
 from .permissions import IsAuthorOfComment
 from .models import Subject, Comment
@@ -25,6 +26,21 @@ class SubjectViewSet(viewsets.ModelViewSet):
     """
     queryset = Subject.objects.all()
     serializer_class = serializers.SubjectSerializer
+
+    def create(self, request, *args, **kwargs):
+        """
+        Override create method for serialize subject with detail serializer
+        
+        :return: response with detail data of new subject
+        """
+        serializer = serializers.DetailSubjectSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+
+        return Response(serializer.data,
+                        status=status.HTTP_201_CREATED,
+                        headers=headers)
 
 
 class UserViewSet(viewsets.ModelViewSet):

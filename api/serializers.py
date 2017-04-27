@@ -16,6 +16,18 @@ class SubjectSerializer(serializers.ModelSerializer):
         ]
 
 
+class DetailSubjectSerializer(serializers.ModelSerializer):
+    """
+        Serializer for detail display of subject model
+    """
+    class Meta:
+        model = Subject
+        fields = [
+            'pk',
+            'name'
+        ]
+
+
 class CommentDetailSerializer(serializers.ModelSerializer):
     """
         Serializer for one comment object display

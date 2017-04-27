@@ -163,7 +163,7 @@ class SeleniumTest(CreateUserForTestMixin):
         import time
 
         # add browser driver
-        chromedriver = "/home/base/Загрузки/chromedriver"
+        chromedriver = "api/chromedriver"
         os.environ["webdriver.chrome.driver"] = chromedriver
         # start chrome browser
         driver = webdriver.Chrome(chromedriver)

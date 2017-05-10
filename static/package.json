@@ -1,0 +1,22 @@
+{
+  "name": "static",
+  "version": "1.0.0",
+  "main": "webpack.config.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "dev": "webpack --progress --watch",
+    "build": "webpack --progress --production --optimize-minimize"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/korsunowk/django-rest-framework-study.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/korsunowk/django-rest-framework-study/issues"
+  },
+  "homepage": "https://github.com/korsunowk/django-rest-framework-study#readme",
+  "description": ""
+}

@@ -5,7 +5,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+var styles = require('../sass/main.scss');
+
+
 ReactDOM.render(
-  <h1>Hello, world!</h1>,
+  <h1 className="page-header">Hello, world!</h1>,
   document.getElementById('root')
 );

@@ -2,8 +2,20 @@
   "name": "static",
   "version": "1.0.0",
   "main": "webpack.config.js",
-  "dependencies": {},
-  "devDependencies": {},
+  "dependencies": {
+    "node-sass": "^4.5.2",
+    "resolve-url-loader": "^2.0.2"
+  },
+  "devDependencies": {
+    "bootstrap-sass": "^3.3.7",
+    "css-loader": "^0.28.1",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "resolve-url-loader": "^2.0.2",
+    "sass-loader": "^6.0.4",
+    "style-loader": "^0.17.0"
+  },
   "scripts": {
     "dev": "webpack --progress --watch",
     "build": "webpack --progress --production --optimize-minimize"

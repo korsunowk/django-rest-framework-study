@@ -12,14 +12,12 @@ function normalizeTime(time) {
 class PageHeader extends React.Component {
     constructor (){
         super();
-        this.getTime = this.getTime.bind(this);
-
-        this.state = this.getTime();
+        this.state = PageHeader.getTime();
 
         this.setNewTime = this.setNewTime.bind(this);
     }
 
-    getTime() {
+    static getTime() {
         let date = new Date();
         return {
             hours : date.getHours(),
@@ -29,28 +27,24 @@ class PageHeader extends React.Component {
         }
     }
     setNewTime(){
-        let date = new Date();
-
         this.setState(
-            this.getTime()
+            PageHeader.getTime()
         )
     }
 
     render() {
         let state = this.state;
-        let date = [
-            normalizeTime(state.hours),
-            normalizeTime(state.minutes) ,
-            normalizeTime(state.seconds),
-            normalizeTime(state.milisec)
-        ].join(':');
+
+        let date = [state.hours, state.minutes, state.seconds, state.milisec]
+            .map(normalizeTime)
+            .join(':');
 
         return (
             <div className="header-with-clock">
                 <h1 className="page-header">Hello, world!</h1>
                 <TimeDisplay title="Live o'clock: " value={date}/>
             </div>
-            )
+        )
     }
 
     componentDidMount () {

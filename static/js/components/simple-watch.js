@@ -8,6 +8,7 @@ class SimpleWatch extends React.Component {
         super();
         this.interval = false;
         this.intervalObj = null;
+        this.simple_interval = false;
 
         this.state = {
             red: 0,
@@ -22,6 +23,8 @@ class SimpleWatch extends React.Component {
         this.setHaos = this.setHaos.bind(this);
         this.goHaos = this.goHaos.bind(this);
         this.stopHaos = this.stopHaos.bind(this);
+        this.startOneLine = this.startOneLine.bind(this);
+        this.goSimpleHaos = this.goSimpleHaos.bind(this);
     }
     setHaos(){
         let newRed = this.state.red + 1;
@@ -46,14 +49,54 @@ class SimpleWatch extends React.Component {
         this.intervalObj = window.setInterval(this.setHaos, 1);
         this.interval = true;
     }
-    stopHaos(){
-        if (this.interval){
-            this.interval = false;
-            clearInterval(this.intervalObj);
+    goSimpleHaos(obj) {
+        this.simple_interval = true;
+        let add = this.state[obj.value] + obj.add;
+        this.setState({
+            [obj.value]: add
+        })
+    }
+    stopHaos(e){
+
+        if (e.target.className == 'simple-watch')
+        {
+            if (this.interval){
+                this.interval = false;
+                clearInterval(this.intervalObj);
+            }
+            else{
+                this.interval = true;
+                this.goHaos();
+            }
         }
-        else{
-            this.interval = true;
-            this.goHaos();
+    }
+    startOneLine(e){
+        switch (e.target.id){
+            case "red": {
+                window.setInterval(
+                    this.goSimpleHaos({value: 'red', add: 1}), 1
+                );
+                break
+            }
+            case "yellow": {
+                break
+            }
+            case "green": {
+                break
+            }
+            case "orange": {
+                break
+            }
+            case "lightblue": {
+                break
+            }
+            case "blue": {
+                break
+            }
+            case "purple": {
+                break
+            }
+
         }
     }
     render () {
@@ -63,25 +106,25 @@ class SimpleWatch extends React.Component {
                     <div className="simple-watch__center">
 
                     </div>
-                    <div className="simple-watch__red" style={{transform: "rotate(" + this.state.red + 'deg)'}}>
+                    <div id="red" className="simple-watch__red" style={{transform: "rotate(" + this.state.red + 'deg)'}} onClick={this.startOneLine}>
 
                     </div>
-                    <div className="simple-watch__yellow" style={{transform: "rotate(" + this.state.yellow + 'deg)'}}>
+                    <div id="yellow" className="simple-watch__yellow" style={{transform: "rotate(" + this.state.yellow + 'deg)'}} onClick={this.startOneLine}>
 
                     </div>
-                    <div className="simple-watch__orange" style={{transform: "rotate(" + this.state.orange + 'deg)'}}>
+                    <div id="orange" className="simple-watch__orange" style={{transform: "rotate(" + this.state.orange + 'deg)'}} onClick={this.startOneLine}>
 
                     </div>
-                    <div className="simple-watch__green" style={{transform: "rotate(" + this.state.green + 'deg)'}}>
+                    <div id="green" className="simple-watch__green" style={{transform: "rotate(" + this.state.green + 'deg)'}} onClick={this.startOneLine}>
 
                     </div>
-                    <div className="simple-watch__lightblue" style={{transform: "rotate(" + this.state.lightblue + 'deg)'}}>
+                    <div id="lightblue" className="simple-watch__lightblue" style={{transform: "rotate(" + this.state.lightblue + 'deg)'}} onClick={this.startOneLine}>
 
                     </div>
-                    <div className="simple-watch__blue" style={{transform: "rotate(" + this.state.blue + 'deg)'}}>
+                    <div id="blue" className="simple-watch__blue" style={{transform: "rotate(" + this.state.blue + 'deg)'}} onClick={this.startOneLine}>
 
                     </div>
-                    <div className="simple-watch__purple" style={{transform: "rotate(" + this.state.purple + 'deg)'}}>
+                    <div id="purple" className="simple-watch__purple" style={{transform: "rotate(" + this.state.purple + 'deg)'}} onClick={this.startOneLine}>
 
                     </div>
                 </div>

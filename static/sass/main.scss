@@ -1,5 +1,6 @@
 $button-color: yellowgreen;
 $time-button-color: #ffcd13;
+
 .buttons-style {
   width: 150px;
   height: 45px;
@@ -7,15 +8,34 @@ $time-button-color: #ffcd13;
   border-radius: 5px;
 }
 
-.page-header {
-  text-align: center;
-  font-size: 45px;
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+
+.header-with-clock {
+    @extend .flex-center;
+    flex-direction: row;
+
+
+    .page-header {
+      text-align: center;
+      font-size: 45px;
+    }
+
+    .time-display {
+      display: flex;
+      align-items: center;
+      font-size: 20px;
+      position: absolute;
+      right: 100px;
+      width: 200px;
+    }
 }
 
 main {
-  display: flex;
+  @extend .flex-center;
   flex-direction: column;
-  justify-content: center;
 
   .counter {
     text-align: center;
@@ -41,8 +61,7 @@ main {
 }
 
 .block-counter {
-  display: flex;
-  justify-content: center;
+  @extend .flex-center;
   margin-bottom: 25px;
 
   .time-button {

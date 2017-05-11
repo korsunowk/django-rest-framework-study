@@ -11,10 +11,10 @@ class CounterBlock extends React.Component {
     constructor (){
         super();
         this.state = {
-            hours: 0,
-            minutes: 0,
-            seconds: 0,
-            milseconds: 0
+            hours: '00',
+            minutes: '00',
+            seconds: '00',
+            milseconds: '000'
         };
         this.intervalObj = null;
         this.interval = false;
@@ -25,25 +25,45 @@ class CounterBlock extends React.Component {
         this.handleTimeButtonClick = this.handleTimeButtonClick.bind(this);
         this.clearTimer = this.clearTimer.bind(this);
     }
+    static formatWithThreeZeros(number) {
+        if (number.toString().length == 1){
+            number = '00' + number;
+        }
+        else if (number.toString().length == 2){
+            number = '0' + number;
+        }
+        return number;
+    }
+
+    static formatWithTwoZeros(number) {
+        if (number.toString().length == 1){
+            number = '0' + number;
+        }
+        return number;
+    }
 
     AddMilisecond(){
-        let milisec = this.state.milseconds + 2;
+        let milisec = CounterBlock.formatWithThreeZeros(
+            parseInt(this.state.milseconds) + 1
+        );
+
         let seconds = this.state.seconds;
         let minutes = this.state.minutes;
         let hours = this.state.hours;
 
-        if (milisec == 1000){
-            milisec = 0;
-            seconds = ++seconds
+        if (milisec = 1000){
+            milisec = '000';
+            seconds = CounterBlock.formatWithTwoZeros(++seconds);
         }
         if (seconds  == 60){
-            seconds = 0;
-            minutes = ++minutes;
+            seconds = '00';
+            minutes = CounterBlock.formatWithTwoZeros(++minutes);
         }
         if (minutes == 60){
-            minutes = 0;
-            hours = ++hours;
+            minutes = '00';
+            hours = CounterBlock.formatWithTwoZeros(++hours);
         }
+
         this.setState({
             hours: hours,
             minutes: minutes,
@@ -62,10 +82,10 @@ class CounterBlock extends React.Component {
     }
     clearTimer() {
         this.setState({
-            hours: 0,
-            minutes: 0,
-            seconds: 0,
-            milseconds: 0
+            hours: '00',
+            minutes: '00',
+            seconds: '00',
+            milseconds: '000'
         })
     }
     startTime() {

@@ -73,6 +73,14 @@ main {
         background-color: lighten($time-button-color, 15%);
       }
   }
+
+  .time-display {
+      display: flex;
+      align-items: center;
+      font-size: 20px;
+      height: 45px;
+      padding-left: 50px;
+  }
 }
 
 .block-watch {

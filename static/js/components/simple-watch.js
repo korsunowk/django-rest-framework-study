@@ -6,39 +6,68 @@ import React from 'react';
 class SimpleWatch extends React.Component {
     constructor () {
         super();
+        this.interval = 0;
         this.state = {
-            seconds: 0,
-            minutes: 0,
-            hours: 0
+            red: 0,
+            orange: 0,
+            yellow: 0,
+            green: 0,
+            lightblue: 0,
+            blue: 0,
+            purple: 0
         };
 
-        this.goHaos = this.goHaos.bind(this)
+        this.goHaos = this.goHaos.bind(this);
+        this.stopHaos = this.stopHaos.bind(this);
     }
     goHaos(){
-        let newSec = this.state.seconds + 5;
-        let newMin = this.state.minutes + 3;
-        let newHour = this.state.hours + 1;
+        let newRed = this.state.red + 1;
+        let newOra = this.state.orange + 2;
+        let newYel = this.state.yellow + 3;
+        let newGre = this.state.green + 4;
+        let newLB = this.state.lightblue + 5;
+        let newB = this.state.blue + 6;
+        let newPurple = this.state.purple + 7;
 
         this.setState({
-            seconds: newSec,
-            minutes: newMin,
-            hours: newHour
+            red: newRed,
+            yellow: newYel,
+            green: newGre,
+            orange: newOra,
+            lightblue: newLB,
+            blue: newB,
+            purple: newPurple
         })
+    }
+    stopHaos(){
+        clearInterval(this.interval);
     }
     render () {
         return (
             <div className="block-watch">
-                <div className="simple-watch">
+                <div className="simple-watch" onClick={this.stopHaos}>
                     <div className="simple-watch__center">
 
                     </div>
-                    <div className="simple-watch__seconds" style={{transform: "rotate(" + this.state.seconds + 'deg)'}}>
+                    <div className="simple-watch__red" style={{transform: "rotate(" + this.state.red + 'deg)'}}>
 
                     </div>
-                    <div className="simple-watch__minutes" style={{transform: "rotate(" + this.state.minutes + 'deg)'}}>
+                    <div className="simple-watch__yellow" style={{transform: "rotate(" + this.state.yellow + 'deg)'}}>
 
                     </div>
-                    <div className="simple-watch__hours" style={{transform: "rotate(" + this.state.hours + 'deg)'}}>
+                    <div className="simple-watch__orange" style={{transform: "rotate(" + this.state.orange + 'deg)'}}>
+
+                    </div>
+                    <div className="simple-watch__green" style={{transform: "rotate(" + this.state.green + 'deg)'}}>
+
+                    </div>
+                    <div className="simple-watch__lightblue" style={{transform: "rotate(" + this.state.lightblue + 'deg)'}}>
+
+                    </div>
+                    <div className="simple-watch__blue" style={{transform: "rotate(" + this.state.blue + 'deg)'}}>
+
+                    </div>
+                    <div className="simple-watch__purple" style={{transform: "rotate(" + this.state.purple + 'deg)'}}>
 
                     </div>
                 </div>
@@ -46,7 +75,7 @@ class SimpleWatch extends React.Component {
         )
     }
     componentDidMount(){
-        window.setInterval(this.goHaos, 1)
+        this.interval = window.setInterval(this.goHaos, 1);
     }
 }
 

@@ -2,13 +2,14 @@
  * Created by base on 11.05.17.
  */
 import React from 'react';
+import OneWheelLine from './line-in-wheel'
+
 
 class SimpleWatch extends React.Component {
     constructor () {
         super();
         this.interval = false;
         this.intervalObj = null;
-        this.simple_interval = false;
 
         this.state = {
             red: 0,
@@ -23,8 +24,6 @@ class SimpleWatch extends React.Component {
         this.setHaos = this.setHaos.bind(this);
         this.goHaos = this.goHaos.bind(this);
         this.stopHaos = this.stopHaos.bind(this);
-        this.startOneLine = this.startOneLine.bind(this);
-        this.goSimpleHaos = this.goSimpleHaos.bind(this);
     }
     setHaos(){
         let newRed = this.state.red + 1;
@@ -49,13 +48,6 @@ class SimpleWatch extends React.Component {
         this.intervalObj = window.setInterval(this.setHaos, 1);
         this.interval = true;
     }
-    goSimpleHaos(obj) {
-        this.simple_interval = true;
-        let add = this.state[obj.value] + obj.add;
-        this.setState({
-            [obj.value]: add
-        })
-    }
     stopHaos(e){
 
         if (e.target.className == 'simple-watch')
@@ -70,35 +62,6 @@ class SimpleWatch extends React.Component {
             }
         }
     }
-    startOneLine(e){
-        switch (e.target.id){
-            case "red": {
-                window.setInterval(
-                    this.goSimpleHaos({value: 'red', add: 1}), 1
-                );
-                break
-            }
-            case "yellow": {
-                break
-            }
-            case "green": {
-                break
-            }
-            case "orange": {
-                break
-            }
-            case "lightblue": {
-                break
-            }
-            case "blue": {
-                break
-            }
-            case "purple": {
-                break
-            }
-
-        }
-    }
     render () {
         return (
             <div className="block-watch">
@@ -106,27 +69,13 @@ class SimpleWatch extends React.Component {
                     <div className="simple-watch__center">
 
                     </div>
-                    <div id="red" className="simple-watch__red" style={{transform: "rotate(" + this.state.red + 'deg)'}} onClick={this.startOneLine}>
-
-                    </div>
-                    <div id="yellow" className="simple-watch__yellow" style={{transform: "rotate(" + this.state.yellow + 'deg)'}} onClick={this.startOneLine}>
-
-                    </div>
-                    <div id="orange" className="simple-watch__orange" style={{transform: "rotate(" + this.state.orange + 'deg)'}} onClick={this.startOneLine}>
-
-                    </div>
-                    <div id="green" className="simple-watch__green" style={{transform: "rotate(" + this.state.green + 'deg)'}} onClick={this.startOneLine}>
-
-                    </div>
-                    <div id="lightblue" className="simple-watch__lightblue" style={{transform: "rotate(" + this.state.lightblue + 'deg)'}} onClick={this.startOneLine}>
-
-                    </div>
-                    <div id="blue" className="simple-watch__blue" style={{transform: "rotate(" + this.state.blue + 'deg)'}} onClick={this.startOneLine}>
-
-                    </div>
-                    <div id="purple" className="simple-watch__purple" style={{transform: "rotate(" + this.state.purple + 'deg)'}} onClick={this.startOneLine}>
-
-                    </div>
+                    <OneWheelLine id="red" className="simple-watch__red" rotate={this.state.red} />
+                    <OneWheelLine id="yellow" className="simple-watch__yellow" rotate={this.state.yellow} />
+                    <OneWheelLine id="orange" className="simple-watch__orange" rotate={this.state.orange} />
+                    <OneWheelLine id="green" className="simple-watch__green" rotate={this.state.green} />
+                    <OneWheelLine id="lightblue" className="simple-watch__lightblue" rotate={this.state.lightblue} />
+                    <OneWheelLine id="blue" className="simple-watch__blue" rotate={this.state.blue} />
+                    <OneWheelLine id="purple" className="simple-watch__purple" rotate={this.state.purple} />
                 </div>
             </div>
         )

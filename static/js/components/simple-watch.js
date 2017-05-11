@@ -6,7 +6,9 @@ import React from 'react';
 class SimpleWatch extends React.Component {
     constructor () {
         super();
-        this.interval = 0;
+        this.interval = false;
+        this.intervalObj = null;
+
         this.state = {
             red: 0,
             orange: 0,
@@ -17,10 +19,11 @@ class SimpleWatch extends React.Component {
             purple: 0
         };
 
+        this.setHaos = this.setHaos.bind(this);
         this.goHaos = this.goHaos.bind(this);
         this.stopHaos = this.stopHaos.bind(this);
     }
-    goHaos(){
+    setHaos(){
         let newRed = this.state.red + 1;
         let newOra = this.state.orange + 2;
         let newYel = this.state.yellow + 3;
@@ -39,8 +42,19 @@ class SimpleWatch extends React.Component {
             purple: newPurple
         })
     }
+    goHaos() {
+        this.intervalObj = window.setInterval(this.setHaos, 1);
+        this.interval = true;
+    }
     stopHaos(){
-        clearInterval(this.interval);
+        if (this.interval){
+            this.interval = false;
+            clearInterval(this.intervalObj);
+        }
+        else{
+            this.interval = true;
+            this.goHaos();
+        }
     }
     render () {
         return (
@@ -75,7 +89,7 @@ class SimpleWatch extends React.Component {
         )
     }
     componentDidMount(){
-        this.interval = window.setInterval(this.goHaos, 1);
+        this.goHaos();
     }
 }
 

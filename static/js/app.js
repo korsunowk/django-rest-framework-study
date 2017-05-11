@@ -5,19 +5,55 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-// var ApiButton = require('./components/button.js');
 import PageHeader from './components/page-header'
-import ApiButton from './components/buttons/one-button'
+import BlockButtons from './components/buttons/buttons-block'
+import BlockCounter from './components/block-counter'
+
 
 var styles = require('../sass/main.scss');
 
 
-ReactDOM.render(
-    (
-        <div>
-            <PageHeader/>
-            <ApiButton className="first-button" title='Go go' href="/"/>
-        </div>
-    ),
-    document.getElementById('root')
-);
+class Main extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+          counter: 0,
+        };
+
+        this.IncrementFunc = this.IncrementFunc.bind(this);
+        this.DecrementFunc = this.DecrementFunc.bind(this);
+        this.MultipleFunc = this.MultipleFunc.bind(this);
+    }
+    IncrementFunc() {
+        let newCount = this.state.counter++;
+
+        this.setState({
+            counter: newCount
+        })
+    }
+    DecrementFunc() {
+        let newCount = this.state.counter--;
+
+        this.setState({
+            counter: newCount
+        })
+    }
+    MultipleFunc() {
+        let newCount = this.state.counter * 5;
+
+        this.setState({
+            counter: newCount
+        })
+    }
+    render () {
+        return (
+            <main>
+                <PageHeader/>
+                <BlockCounter counter={this.state.counter}/>
+                <BlockButtons inc={this.IncrementFunc} dec={this.DecrementFunc} mul={this.MultipleFunc}/>
+            </main>
+        )
+    }
+}
+
+ReactDOM.render(<Main/>, document.getElementById('root'));

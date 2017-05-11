@@ -1,10 +1,58 @@
+$button-color: yellowgreen;
+$time-button-color: #ffcd13;
+.buttons-style {
+  width: 150px;
+  height: 45px;
+  font-size: 21px;
+  border-radius: 5px;
+}
+
 .page-header {
   text-align: center;
   font-size: 45px;
 }
 
-button {
-  min-width: 150px;
-  min-height: 45px;
-  font-size: 21px;
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .counter {
+    text-align: center;
+    padding-bottom: 20px;
+    font-size: 30px;
+  }
 }
+
+.buttons-block {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20% 0 20%;
+
+  button {
+    @extend .buttons-style;
+    background-color: $button-color;
+    border: 2px solid green;
+
+    &:hover {
+      background-color: lighten($button-color, 15%);
+    }
+  }
+}
+
+.block-counter {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+
+  .time-button {
+      @extend .buttons-style;
+      background-color: $time-button-color;
+      border: 2px solid #ffb41e;
+      margin-left: 200px;
+      &:hover {
+        background-color: lighten($time-button-color, 15%);
+      }
+  }
+}
+

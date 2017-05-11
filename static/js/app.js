@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom';
 
 // var ApiButton = require('./components/button.js');
 import PageHeader from './components/page-header'
-import ApiButton from './components/button'
+import ApiButton from './components/buttons/one-button'
 
 var styles = require('../sass/main.scss');
 

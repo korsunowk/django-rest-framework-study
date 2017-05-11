@@ -1,4 +1,5 @@
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var LiveReloadPlugin = require('webpack-livereload-plugin');
 
 module.exports = {
     entry: "./js/app.js",
@@ -22,6 +23,7 @@ module.exports = {
         ]
     },
     plugins: [
-        new ExtractTextPlugin({filename: 'public/styles.css', allChunks: true, disable: false})
+        new ExtractTextPlugin({filename: 'public/styles.css', allChunks: true, disable: false}),
+        new LiveReloadPlugin()
     ]
-}
+};

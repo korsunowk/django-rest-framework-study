@@ -9,7 +9,7 @@ var React = require('react');
 class ApiButton extends React.Component {
     render () {
         return (
-            <button className={this.props.className} href={this.props.href}>
+            <button className={this.props.className} href={this.props.href} onClick={this.props.onClick}>
                 {this.props.title}
             </button>
         )

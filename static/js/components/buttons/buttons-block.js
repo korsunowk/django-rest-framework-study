@@ -8,9 +8,11 @@ class BlockButtons extends React.Component {
     render() {
         return (
             <div className="buttons-block">
-                <Button className="first-button" title='+1' href="/" onClick={this.props.inc}/>
-                <Button className="second-button" title='-1' href="/" onClick={this.props.dec}/>
-                <Button className="third-button" title='*5' href="/" onClick={this.props.mul}/>
+                <Button className="mul-button" title='*5' href="/" onClick={this.props.mul}/>
+                <Button className="inc-button" title='+1' href="/" onClick={this.props.inc}/>
+                <Button className="null-button" title='Clear' href="/" onClick={this.props.clear}/>
+                <Button className="dec-button" title='-1' href="/" onClick={this.props.dec}/>
+                <Button className="dev-button" title='/5' href="/" onClick={this.props.dev}/>
             </div>
         )
     }

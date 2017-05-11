@@ -23,17 +23,23 @@ class Main extends React.Component {
         this.IncrementFunc = this.IncrementFunc.bind(this);
         this.DecrementFunc = this.DecrementFunc.bind(this);
         this.MultipleFunc = this.MultipleFunc.bind(this);
+        this.ClearFunc = this.ClearFunc.bind(this);
+        this.DevFunc = this.DevFunc.bind(this);
     }
-    IncrementFunc() {
-        let newCount = this.state.counter++;
 
+    IncrementFunc() {
+        let newCount = ++this.state.counter;
         this.setState({
             counter: newCount
         })
     }
+    ClearFunc() {
+        this.setState({
+            counter: 0
+        })
+    }
     DecrementFunc() {
-        let newCount = this.state.counter--;
-
+        let newCount = --this.state.counter;
         this.setState({
             counter: newCount
         })
@@ -45,12 +51,19 @@ class Main extends React.Component {
             counter: newCount
         })
     }
+    DevFunc() {
+        let newCount = this.state.counter / 5;
+
+        this.setState({
+            counter: newCount
+        })
+    }
     render () {
         return (
             <main>
                 <PageHeader/>
                 <BlockCounter counter={this.state.counter}/>
-                <BlockButtons inc={this.IncrementFunc} dec={this.DecrementFunc} mul={this.MultipleFunc}/>
+                <BlockButtons inc={this.IncrementFunc} dec={this.DecrementFunc} mul={this.MultipleFunc} clear={this.ClearFunc} dev={this.DevFunc} />
             </main>
         )
     }

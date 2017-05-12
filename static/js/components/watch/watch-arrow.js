@@ -6,20 +6,21 @@ import React from 'react';
 class WatchArrow extends React.Component {
     constructor() {
         super();
-
         this.state = {
             value: 180,
             delay: 0,
-            offset: 6
+            offset: 6,
+            start: false
         };
 
         this._start = this._start.bind(this);
         this.start = this.start.bind(this);
     }
     start () {
-        window.setInterval(
-            this._start, this.state.delay
-        )
+        if (this.state.start)
+            window.setInterval(
+                this._start, this.state.delay
+            )
     }
     _start () {
         let newValue = this.state.value + this.state.offset;
@@ -29,8 +30,9 @@ class WatchArrow extends React.Component {
     }
     componentWillMount() {
         this.setState({
-            delay: this.props.delay
-        })
+            delay: this.props.delay,
+            start: this.props.start
+        });
     }
     render () {
         return (

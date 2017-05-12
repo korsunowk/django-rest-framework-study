@@ -10,11 +10,13 @@ class Watch extends React.Component {
     }
 
     render() {
+        let start = this.props.start;
+
         return (
             <div className="watch">
-                <WatchArrow delay={1000} type="seconds" />
-                <WatchArrow delay={1000 * 60} type="minutes" />
-                <WatchArrow delay={1000 * 60 * 60} type="hours" />
+                <WatchArrow delay={1000} type="seconds" start={start} />
+                <WatchArrow delay={1000 * 60} type="minutes" start={start} />
+                <WatchArrow delay={1000 * 60 * 60} type="hours" start={start} />
             </div>
         )
     }

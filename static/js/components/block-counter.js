@@ -6,6 +6,8 @@ import React from 'react';
 import Counter from './counter'
 import TimeButton from './buttons/one-button'
 import TimeDisplay from './display-time'
+import Watch from './watch/watch'
+
 
 class CounterBlock extends React.Component {
     constructor (){
@@ -14,7 +16,8 @@ class CounterBlock extends React.Component {
             hours: '00',
             minutes: '00',
             seconds: '00',
-            milseconds: '000'
+            milseconds: '000',
+            watch_start: false
         };
         this.intervalObj = null;
         this.interval = false;
@@ -68,7 +71,8 @@ class CounterBlock extends React.Component {
             hours: hours,
             minutes: minutes,
             seconds: seconds,
-            milseconds: milisec
+            milseconds: milisec,
+            watch_start: true
         })
     }
 
@@ -85,7 +89,8 @@ class CounterBlock extends React.Component {
             hours: '00',
             minutes: '00',
             seconds: '00',
-            milseconds: '000'
+            milseconds: '000',
+            watch_start: false
         })
     }
     startTime() {
@@ -103,11 +108,13 @@ class CounterBlock extends React.Component {
     render () {
         let state = this.state;
         let timer = [state.hours, state.minutes, state.seconds, state.milseconds].join(':');
+        let watch = state.watch_start;
         return (
             <div className="block-counter">
                 <Counter counter={this.props.counter}/>
-                <TimeButton title="Time Button" className="time-button" onClick={this.handleTimeButtonClick}/>
+                <TimeButton title="Timer Button" className="time-button" onClick={this.handleTimeButtonClick}/>
                 <TimeDisplay title="Timer: " value={timer}/>
+                <Watch start={watch}/>
             </div>
         )
     }

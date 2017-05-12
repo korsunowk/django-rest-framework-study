@@ -48,14 +48,14 @@ class CounterBlock extends React.Component {
 
     AddMilisecond(){
         let milisec = CounterBlock.formatWithThreeZeros(
-            parseInt(this.state.milseconds) + 4
+            parseInt(this.state.milseconds) + 6
         );
 
         let seconds = this.state.seconds;
         let minutes = this.state.minutes;
         let hours = this.state.hours;
 
-        if (milisec == 1000){
+        if (milisec == 1002){
             milisec = '000';
             seconds = CounterBlock.formatWithTwoZeros(++seconds);
         }

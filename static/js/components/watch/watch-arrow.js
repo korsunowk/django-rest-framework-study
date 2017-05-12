@@ -8,19 +8,32 @@ class WatchArrow extends React.Component {
         super();
         this.state = {
             value: 180,
-            delay: 0,
-            offset: 6,
-            start: false
+            offset: 6
         };
+        this.interval = true;
+        this.interval_obj = null;
+        this.go = false;
+        this.delay = 0;
 
         this._start = this._start.bind(this);
         this.start = this.start.bind(this);
+        this.stop = this.stop.bind(this);
+    }
+    stop() {
+        this.go = false;
+        this.interval = false;
+        clearInterval(this.interval_obj)
     }
     start () {
-        if (this.state.start)
-            window.setInterval(
-                this._start, this.state.delay
+        if (this.go) {
+            this.setState({
+               value: 180
+            });
+            this.interval = true;
+            this.interval_obj = window.setInterval(
+                this._start, this.delay
             )
+        }
     }
     _start () {
         let newValue = this.state.value + this.state.offset;
@@ -29,21 +42,23 @@ class WatchArrow extends React.Component {
         })
     }
     componentWillReceiveProps(nextProps) {
-        this.setState({
-            start: nextProps.start
-        })
-    }
-    componentWillMount() {
-        this.setState({
-            delay: this.props.delay,
-            start: this.props.start
-        });
+        if (this.go != nextProps.start || this.delay != nextProps.delay)
+        {
+            if (nextProps.start){
+                this.go = true;
+                this.delay = nextProps.delay;
+                this.start();
+            }
+            else
+                this.stop()
+        }
     }
     render () {
         return (
             <div
                 className={"watch__arrow " + this.props.type}
                 style={{transform: "rotate(" + this.state.value + 'deg)'}}>
+
 
             </div>
         )

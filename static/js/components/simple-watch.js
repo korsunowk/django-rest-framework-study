@@ -41,6 +41,7 @@ class SimpleWatch extends React.Component {
                     rotate={this.state[colors[i]]}
                     key={i}
                     stop={this.state.stop}
+                    speed={this.props.speed}
                 />
             )
         }

@@ -8,7 +8,7 @@ import ReactDOM from 'react-dom';
 import PageHeader from './components/page-header'
 import BlockButtons from './components/buttons/buttons-block'
 import BlockCounter from './components/block-counter'
-import SimpleWatch from './components/simple-watch'
+import WheelWithRange from './components/wheel-with-range'
 
 var styles = require('../sass/main.scss');
 
@@ -64,7 +64,7 @@ class Main extends React.Component {
                 <PageHeader/>
                 <BlockCounter counter={this.state.counter}/>
                 <BlockButtons inc={this.IncrementFunc} dec={this.DecrementFunc} mul={this.MultipleFunc} clear={this.ClearFunc} dev={this.DevFunc} />
-                <SimpleWatch/>
+                <WheelWithRange />
             </main>
         )
     }

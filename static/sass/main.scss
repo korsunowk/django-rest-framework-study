@@ -196,3 +196,13 @@ main {
       }
     }
 }
+
+.wheel-with-range {
+    @extend .flex-center;
+    flex-direction: row;
+    align-items: baseline;
+
+    .wheel-range-block {
+      padding-left: 50px;
+    }
+}

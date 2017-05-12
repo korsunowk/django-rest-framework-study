@@ -13,6 +13,7 @@ class OneWheelLine extends React.Component {
         this.state = {
             value: 0,
             rotate: 0,
+            speed: 100,
             stop: false
         };
 
@@ -27,7 +28,7 @@ class OneWheelLine extends React.Component {
             }
             else{
                 this.interval = true;
-                this.intervalObj = window.setInterval(this.setRotate, 100);
+                this.intervalObj = window.setInterval(this.setRotate, this.state.speed);
             }
         }
     }
@@ -40,7 +41,8 @@ class OneWheelLine extends React.Component {
     componentWillMount() {
         this.setState({
             stop: this.props.stop,
-            rotate: this.props.rotate
+            rotate: this.props.rotate,
+            speed: this.props.speed
         });
     }
     render () {

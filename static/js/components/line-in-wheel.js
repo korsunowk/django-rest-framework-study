@@ -17,7 +17,6 @@ class OneWheelLine extends React.Component {
         };
 
         this.toggleRotate = this.toggleRotate.bind(this);
-        this.goSimpleHaos = this.goSimpleHaos.bind(this);
         this.setRotate = this.setRotate.bind(this);
     }
     toggleRotate() {
@@ -27,13 +26,7 @@ class OneWheelLine extends React.Component {
         }
         else{
             this.interval = true;
-            this.goSimpleHaos();
-        }
-    }
-    goSimpleHaos() {
-        if (!this.state.stop){
             this.intervalObj = window.setInterval(this.setRotate, 100);
-            this.interval = true;
         }
     }
     setRotate(){
@@ -65,7 +58,7 @@ class OneWheelLine extends React.Component {
         )
     }
     componentDidMount () {
-        this.goSimpleHaos();
+        this.toggleRotate();
     }
 }
 

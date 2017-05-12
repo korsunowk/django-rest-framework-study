@@ -12,9 +12,9 @@ class Watch extends React.Component {
     render() {
         return (
             <div className="watch">
-                <WatchArrow delay={1000/5} type="seconds" />
-                <WatchArrow delay={1000 * 60 /5} type="minutes" />
-                <WatchArrow delay={1000 * 60 * 60 /5} type="hours" />
+                <WatchArrow delay={1000} type="seconds" />
+                <WatchArrow delay={1000 * 60} type="minutes" />
+                <WatchArrow delay={1000 * 60 * 60} type="hours" />
             </div>
         )
     }

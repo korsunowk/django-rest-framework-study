@@ -30,7 +30,8 @@ class OneWheelLine extends React.Component {
                     id={this.props.id}
                     className={this.props.className}
                     style={{transform: "rotate(" + rotate + 'deg)'}}
-                    onClick={this.startOneLine} >
+                    onClick={this.startOneLine}
+                    key={this.props.key} >
                 </div>
         )
     }

@@ -63,19 +63,22 @@ class SimpleWatch extends React.Component {
         }
     }
     render () {
+        let colors = ["red", "yellow", "orange", "green", "lightblue", "blue", "purple"];
+        let lines = [];
+
+        for(let i=0; i< colors.length; i++){
+            lines.push(
+                <OneWheelLine id={colors[i]} className={"simple-watch__" + colors[i]} rotate={this.state[colors[i]]} key={i} />
+            )
+        }
+
         return (
             <div className="block-watch">
                 <div className="simple-watch" onClick={this.stopHaos}>
                     <div className="simple-watch__center">
 
                     </div>
-                    <OneWheelLine id="red" className="simple-watch__red" rotate={this.state.red} />
-                    <OneWheelLine id="yellow" className="simple-watch__yellow" rotate={this.state.yellow} />
-                    <OneWheelLine id="orange" className="simple-watch__orange" rotate={this.state.orange} />
-                    <OneWheelLine id="green" className="simple-watch__green" rotate={this.state.green} />
-                    <OneWheelLine id="lightblue" className="simple-watch__lightblue" rotate={this.state.lightblue} />
-                    <OneWheelLine id="blue" className="simple-watch__blue" rotate={this.state.blue} />
-                    <OneWheelLine id="purple" className="simple-watch__purple" rotate={this.state.purple} />
+                    {lines}
                 </div>
             </div>
         )

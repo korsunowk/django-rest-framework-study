@@ -28,6 +28,11 @@ class WatchArrow extends React.Component {
             value: newValue
         })
     }
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            start: nextProps.start
+        })
+    }
     componentWillMount() {
         this.setState({
             delay: this.props.delay,

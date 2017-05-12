@@ -11,7 +11,6 @@ class Watch extends React.Component {
 
     render() {
         let start = this.props.start;
-
         return (
             <div className="watch">
                 <WatchArrow delay={1000} type="seconds" start={start} />

@@ -28,6 +28,7 @@ class CounterBlock extends React.Component {
         this.handleTimeButtonClick = this.handleTimeButtonClick.bind(this);
         this.clearTimer = this.clearTimer.bind(this);
     }
+
     static formatWithThreeZeros(number) {
         if (number.toString().length == 1){
             number = '00' + number;
@@ -84,6 +85,7 @@ class CounterBlock extends React.Component {
             this.startTime();
         }
     }
+
     clearTimer() {
         this.setState({
             hours: '00',
@@ -93,6 +95,7 @@ class CounterBlock extends React.Component {
             watch_start: false
         })
     }
+
     startTime() {
         this.interval = true;
         this.intervalObj = window.setInterval(
@@ -100,6 +103,7 @@ class CounterBlock extends React.Component {
             1
         )
     }
+
     stopTime() {
         this.interval = false;
         clearInterval(this.intervalObj);
@@ -108,13 +112,13 @@ class CounterBlock extends React.Component {
     render () {
         let state = this.state;
         let timer = [state.hours, state.minutes, state.seconds, state.milseconds].join(':');
-        let watch = state.watch_start;
+
         return (
             <div className="block-counter">
                 <Counter counter={this.props.counter}/>
                 <TimeButton title="Timer Button" className="time-button" onClick={this.handleTimeButtonClick}/>
                 <TimeDisplay title="Timer: " value={timer}/>
-                <Watch start={watch}/>
+                <Watch start={state.watch_start}/>
             </div>
         )
     }

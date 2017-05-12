@@ -91,8 +91,7 @@ class CounterBlock extends React.Component {
             hours: '00',
             minutes: '00',
             seconds: '00',
-            milseconds: '000',
-            watch_start: false
+            milseconds: '000'
         })
     }
 
@@ -106,6 +105,9 @@ class CounterBlock extends React.Component {
 
     stopTime() {
         this.interval = false;
+        this.setState({
+           watch_start: false
+        });
         clearInterval(this.intervalObj);
     }
 

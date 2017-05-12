@@ -139,3 +139,29 @@ main {
       }
   }
 }
+
+.watch {
+  @extend .flex-center;
+
+  align-items: center;
+  border-radius: 50%;
+  border: 3px solid black;
+  width: 300px;
+  height: 300px;
+
+  &__arrow {
+      background-color: black;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+
+      &::after {
+        margin-top: 7.5px;
+        margin-left: 6.5px;
+        position: absolute;
+        content: '';
+        height: 149px;
+        border: 2px solid black;
+      }
+  }
+}

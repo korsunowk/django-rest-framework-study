@@ -6,8 +6,8 @@ import OneWheelLine from './line-in-wheel'
 
 
 class SimpleWatch extends React.Component {
-    constructor () {
-        super();
+    constructor (props) {
+        super(props);
 
         this.state = {
             red: 1,
@@ -25,10 +25,8 @@ class SimpleWatch extends React.Component {
     toogleHaos(e) {
         if (e.target.className == 'simple-watch')
         {
-            let stop = !this.state.stop;
-
             this.setState({
-                stop: stop
+                stop: !this.state.stop
             })
         }
     }

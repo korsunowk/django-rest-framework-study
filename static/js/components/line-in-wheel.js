@@ -4,8 +4,8 @@
 import React from 'react';
 
 class OneWheelLine extends React.Component {
-    constructor () {
-        super();
+    constructor (props) {
+        super(props);
 
         this.intervalObj = null;
         this.interval = false;
@@ -20,13 +20,15 @@ class OneWheelLine extends React.Component {
         this.setRotate = this.setRotate.bind(this);
     }
     toggleRotate() {
-        if (this.interval){
-            this.interval = false;
-            clearInterval(this.intervalObj);
-        }
-        else{
-            this.interval = true;
-            this.intervalObj = window.setInterval(this.setRotate, 100);
+        if (!this.state.stop) {
+            if (this.interval){
+                this.interval = false;
+                clearInterval(this.intervalObj);
+            }
+            else{
+                this.interval = true;
+                this.intervalObj = window.setInterval(this.setRotate, 100);
+            }
         }
     }
     setRotate(){
@@ -36,13 +38,8 @@ class OneWheelLine extends React.Component {
         })
     }
     componentWillMount() {
-        if (this.props.stop)
-        {
-            this.setState({
-                stop: this.props.stop
-            })
-        }
         this.setState({
+            stop: this.props.stop,
             rotate: this.props.rotate
         });
     }

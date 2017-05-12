@@ -19,6 +19,11 @@ class OneWheelLine extends React.Component {
 
         this.toggleRotate = this.toggleRotate.bind(this);
         this.setRotate = this.setRotate.bind(this);
+        this.updateInterval = this.updateInterval.bind(this);
+    }
+    updateInterval () {
+        clearInterval(this.intervalObj);
+        this.intervalObj = window.setInterval(this.setRotate, this.state.speed);
     }
     toggleRotate() {
         if (!this.state.stop) {
@@ -44,6 +49,12 @@ class OneWheelLine extends React.Component {
             rotate: this.props.rotate,
             speed: this.props.speed
         });
+    }
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            speed: nextProps.speed
+        });
+        this.updateInterval()
     }
     render () {
         return (

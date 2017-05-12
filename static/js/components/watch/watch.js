@@ -5,10 +5,16 @@ import React from 'react';
 import WatchArrow from './watch-arrow'
 
 class Watch extends React.Component {
+    constructor () {
+        super();
+    }
+
     render() {
         return (
             <div className="watch">
-                <WatchArrow />
+                <WatchArrow delay={1000/5} type="seconds" />
+                <WatchArrow delay={1000 * 60 /5} type="minutes" />
+                <WatchArrow delay={1000 * 60 * 60 /5} type="hours" />
             </div>
         )
     }

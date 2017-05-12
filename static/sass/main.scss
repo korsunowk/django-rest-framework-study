@@ -13,6 +13,13 @@ $time-button-color: #ffcd13;
   justify-content: center;
 }
 
+.arrow-mixin {
+  margin-top: 7.5px;
+  margin-left: 6.5px;
+  position: absolute;
+  content: '';
+}
+
 .header-with-clock {
     @extend .flex-center;
     flex-direction: row;
@@ -154,14 +161,31 @@ main {
       width: 15px;
       height: 15px;
       border-radius: 50%;
+      position: absolute;
 
-      &::after {
-        margin-top: 7.5px;
-        margin-left: 6.5px;
-        position: absolute;
-        content: '';
-        height: 149px;
-        border: 2px solid black;
+      &.seconds {
+        &::after {
+          @extend .arrow-mixin;
+          height: 120px;
+          border: 1px solid black;
+        }
       }
-  }
+
+      &.minutes {
+        &::after {
+          @extend .arrow-mixin;
+          height: 100px;
+          border: 2px solid black;
+        }
+
+      }
+
+      &.hours {
+        &::after {
+          @extend .arrow-mixin;
+          height: 75px;
+          border: 3px solid black;
+        }
+      }
+    }
 }

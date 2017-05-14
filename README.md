@@ -1,8 +1,8 @@
-Репозиторий для изучения ДРФ и ReactJS + webpack.
+Репозиторий для изучения **Django REST Framework**, **ReactJS** + **webpack**.
 
 На данный момент в проекте: 
 ===========================
- Django rest framework : 
+ Django rest framework: 
  ---
 - _пермишены;_ 
 - _unit-тесты;_

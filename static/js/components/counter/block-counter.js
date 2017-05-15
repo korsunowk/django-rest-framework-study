@@ -4,10 +4,11 @@
 import React from 'react';
 
 import Counter from './counter'
-import TimeButton from '../buttons/one-button'
+import ApiButton from '../buttons/one-button'
 import TimeDisplay from '../numberic-timer/display-time'
 import Watch from '../watch/watch'
 
+import styled from 'styled-components';
 
 class CounterBlock extends React.Component {
     constructor (){
@@ -116,14 +117,21 @@ class CounterBlock extends React.Component {
         let timer = [state.hours, state.minutes, state.seconds, state.milseconds].join(':');
 
         return (
-            <div className="block-counter">
+            <BlockCounter>
                 <Counter counter={this.props.counter}/>
-                <TimeButton title="Timer Button" className="time-button" onClick={this.handleTimeButtonClick}/>
-                <TimeDisplay title="Timer: " value={timer}/>
+                <ApiButton title="Timer Button" button_type="time-button" onClick={this.handleTimeButtonClick}/>
+                <TimeDisplay title="Timer: " value={timer} timer={true}/>
                 <Watch start={state.watch_start}/>
-            </div>
+            </BlockCounter>
         )
     }
 }
+
+const BlockCounter = styled.div`
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+    align-items: center;
+  `;
 
 export default CounterBlock;

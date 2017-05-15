@@ -3,8 +3,17 @@
  */
 
 import React from 'react';
+import styled from 'styled-components';
+
 import Wheel from './wheel/wheel'
 import WheelRange from './range-for-wheel/range-input-for-wheel'
+
+const WheelBlock = styled.div`
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: baseline;
+  `;
 
 class WheelWithRange extends React.Component {
     constructor () {
@@ -21,10 +30,10 @@ class WheelWithRange extends React.Component {
     }
     render () {
         return (
-            <div className="wheel-with-range">
+            <WheelBlock>
                 <Wheel speed={this.state.range} />
                 <WheelRange onChange={this.handlerChangeRange} />
-            </div>
+            </WheelBlock>
         )
     }
 }

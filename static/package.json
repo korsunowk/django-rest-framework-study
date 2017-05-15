@@ -4,7 +4,8 @@
   "main": "webpack.config.js",
   "dependencies": {
     "node-sass": "^4.5.2",
-    "resolve-url-loader": "^2.0.2"
+    "resolve-url-loader": "^2.0.2",
+    "styled-components": "^1.4.6"
   },
   "devDependencies": {
     "bootstrap-sass": "^3.3.7",

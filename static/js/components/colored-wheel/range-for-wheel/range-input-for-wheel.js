@@ -2,22 +2,26 @@
  * Created by base on 12.05.17.
  */
 import React from 'react';
+import styled from 'styled-components';
 
-export default class WheelRange extends React.Component {
-    render () {
-        return (
-            <div className="wheel-range-block">
-                <span>
-                    Speed:
-                </span>
-                <input
-                    onChange={this.props.onChange}
-                    type="range"
-                    min="1"
-                    max="100"
-                    className="wheel-range"
-                />
-            </div>
-        )
-    }
+function WheelRange(props) {
+    return (
+        <WheelBlock>
+            <span>
+                Speed:
+            </span>
+            <input
+                onChange={props.onChange}
+                type="range"
+                min="1"
+                max="100"
+            />
+        </WheelBlock>
+    )
 }
+
+const WheelBlock = styled.div`
+    padding-left: 50px;
+  `;
+
+export default WheelRange;

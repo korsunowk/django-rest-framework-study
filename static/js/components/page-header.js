@@ -42,7 +42,7 @@ class PageHeader extends React.Component {
         return (
             <div className="header-with-clock">
                 <h1 className="page-header">Welcome to Trash!</h1>
-                <TimeDisplay title="Live o'clock: " value={date}/>
+                <TimeDisplay title="Live o'clock: " value={date} timer={false}/>
             </div>
         )
     }

@@ -43,7 +43,7 @@ class PageHeader extends React.Component {
 
         return (
             <HeaderWithOClock>
-                <HeaderText>Welcome to Trash!</HeaderText>
+                <HeaderText>Welcome!</HeaderText>
                 <TimeDisplay title="Live o'clock: " value={date} timer={false}/>
             </HeaderWithOClock>
         )

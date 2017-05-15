@@ -1,5 +1,5 @@
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var LiveReloadPlugin = require('webpack-livereload-plugin');
+// var LiveReloadPlugin = require('webpack-livereload-plugin');
+var webpack = require('webpack');
 
 process.env.NODE_ENV = 'development';
 
@@ -18,13 +18,17 @@ module.exports = {
             },
         ],
          loaders: [{
-            test: /\.(js|jsx)$/,
-            exclude: /(node_modules)/,
-            loaders: ["babel-loader"]
-        }
-        ]
+              test: /\.js$/,
+              exclude: /node_modules/,
+              loader: "babel",
+              include: __dirname,
+              query: {
+                presets: [ 'es2015', 'react', 'react-hmre' ]
+              }
+        }]
     },
-    // plugins: [
+    plugins: [
     //     new LiveReloadPlugin()
-    // ]
+        new webpack.HotModuleReplacementPlugin()
+    ]
 };

@@ -2,6 +2,8 @@
  * Created by base on 10.05.17.
  */
 import React from 'react';
+import styled from 'styled-components';
+
 import TimeDisplay from './numberic-timer/display-time';
 
 function normalizeTime(time) {
@@ -40,10 +42,10 @@ class PageHeader extends React.Component {
             .join(':');
 
         return (
-            <div className="header-with-clock">
-                <h1 className="page-header">Welcome to Trash!</h1>
+            <HeaderWithOClock>
+                <HeaderText>Welcome to Trash!</HeaderText>
                 <TimeDisplay title="Live o'clock: " value={date} timer={false}/>
-            </div>
+            </HeaderWithOClock>
         )
     }
 
@@ -55,4 +57,14 @@ class PageHeader extends React.Component {
     }
 }
 
+const HeaderText = styled.h1`
+    text-align: center;
+    font-size: 45px;
+  `;
+
+const HeaderWithOClock = styled.div`
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+  `;
 export default PageHeader;

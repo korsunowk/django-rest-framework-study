@@ -10,21 +10,6 @@
   content: '';
 }
 
-.header-with-clock {
-    @extend .flex-center;
-    flex-direction: row;
-
-    .page-header {
-      text-align: center;
-      font-size: 45px;
-    }
-}
-
-main {
-  @extend .flex-center;
-  flex-direction: column;
-}
-
 .block-watch {
   @extend .flex-center;
   margin-top: 100px;

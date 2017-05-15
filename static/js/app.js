@@ -4,6 +4,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import styled from 'styled-components';
 
 import PageHeader from './components/page-header'
 import BlockButtons from './components/buttons/buttons-block'
@@ -60,14 +61,20 @@ class Main extends React.Component {
     }
     render () {
         return (
-            <main>
+            <MainBlock>
                 <PageHeader/>
                 <BlockCounter counter={this.state.counter}/>
                 <BlockButtons inc={this.IncrementFunc} dec={this.DecrementFunc} mul={this.MultipleFunc} clear={this.ClearFunc} dev={this.DevFunc} />
                 <WheelWithRange />
-            </main>
+            </MainBlock>
         )
     }
 }
+
+const MainBlock = styled.main`
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  `;
 
 ReactDOM.render(<Main/>, document.getElementById('root'));

@@ -2,6 +2,8 @@
  * Created by base on 12.05.17.
  */
 import React from 'react';
+import styled from 'styled-components';
+
 
 class WatchArrow extends React.Component {
     constructor() {
@@ -54,18 +56,68 @@ class WatchArrow extends React.Component {
         }
     }
     render () {
+        let Arrow = this.props.type;
+        switch (Arrow) {
+            case "seconds":
+                Arrow = seconds_arrow;
+                break;
+            case "minutes":
+                Arrow = minutes_arrow;
+                break;
+            case "hours":
+                Arrow = hours_arrow;
+                break
+        }
         return (
-            <div
-                className={"watch__arrow " + this.props.type}
+            <Arrow
                 style={{transform: "rotate(" + this.state.value + 'deg)'}}>
-
-
-            </div>
+            </Arrow>
         )
     }
     componentDidMount () {
         this.start()
     }
 }
+
+const ColoredArrow = styled.div`
+    background-color: black;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    position: absolute;
+  `;
+
+let arrow_mixin = `
+    margin-top: 7.5px;
+    margin-left: 6.5px;
+    position: absolute;
+    content: '';
+`;
+
+let seconds_arrow = styled(ColoredArrow)`
+    &::after {
+      ${arrow_mixin}
+      height: 120px;
+      border: 1px solid black;
+      border-radius: 2px;
+    }`;
+
+let minutes_arrow = styled(ColoredArrow)`
+    &::after {
+      ${arrow_mixin}
+      height: 100px;
+      border: 2px solid black;
+      border-radius: 4px;
+    }`;
+
+let hours_arrow = styled(ColoredArrow)`
+    &::after {
+      ${arrow_mixin}
+      margin-left: 5.5px;
+      height: 75px;
+      border: 3px solid black;
+      border-radius: 4px;
+    }
+`;
 
 export default WatchArrow;

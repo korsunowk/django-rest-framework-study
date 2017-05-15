@@ -3,13 +3,6 @@
   justify-content: center;
 }
 
-.arrow-mixin {
-  margin-top: 7.5px;
-  margin-left: 6.5px;
-  position: absolute;
-  content: '';
-}
-
 .block-watch {
   @extend .flex-center;
   margin-top: 100px;
@@ -65,51 +58,4 @@
         background-color: purple;
       }
   }
-}
-
-.watch {
-  @extend .flex-center;
-
-  align-items: center;
-  border-radius: 50%;
-  border: 3px solid black;
-  width: 300px;
-  height: 300px;
-
-  &__arrow {
-      background-color: black;
-      width: 15px;
-      height: 15px;
-      border-radius: 50%;
-      position: absolute;
-
-      &.seconds {
-        &::after {
-          @extend .arrow-mixin;
-          height: 120px;
-          border: 1px solid black;
-          border-radius: 2px;
-        }
-      }
-
-      &.minutes {
-        &::after {
-          @extend .arrow-mixin;
-          height: 100px;
-          border: 2px solid black;
-          border-radius: 4px;
-        }
-
-      }
-
-      &.hours {
-        &::after {
-          @extend .arrow-mixin;
-          margin-left: 5.5px;
-          height: 75px;
-          border: 3px solid black;
-          border-radius: 4px;
-        }
-      }
-    }
 }

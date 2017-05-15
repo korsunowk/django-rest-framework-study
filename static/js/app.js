@@ -62,7 +62,11 @@ class Main extends React.Component {
             <MainBlock>
                 <PageHeader/>
                 <BlockCounter counter={this.state.counter}/>
-                <BlockButtons inc={this.IncrementFunc} dec={this.DecrementFunc} mul={this.MultipleFunc} clear={this.ClearFunc} dev={this.DevFunc} />
+                <BlockButtons inc={this.IncrementFunc}
+                              dec={this.DecrementFunc}
+                              mul={this.MultipleFunc}
+                              clear={this.ClearFunc}
+                              dev={this.DevFunc} />
                 <WheelWithRange />
             </MainBlock>
         )

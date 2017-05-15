@@ -11,9 +11,15 @@ function Watch (props) {
 
     return (
         <WatchBlock>
-            <WatchArrow delay={1000} type="seconds" start={start} />
-            <WatchArrow delay={1000 * 60} type="minutes" start={start} />
-            <WatchArrow delay={1000 * 60 * 60} type="hours" start={start} />
+            <WatchArrow delay={1000}
+                        type="seconds"
+                        start={start} />
+            <WatchArrow delay={1000 * 60}
+                        type="minutes"
+                        start={start} />
+            <WatchArrow delay={1000 * 60 * 60}
+                        type="hours"
+                        start={start} />
         </WatchBlock>
     )
 }

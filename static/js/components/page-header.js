@@ -37,14 +37,17 @@ class PageHeader extends React.Component {
     render() {
         let state = this.state;
 
-        let date = [state.hours, state.minutes, state.seconds, state.milisec]
+        let date = [state.hours, state.minutes,
+                    state.seconds, state.milisec]
             .map(normalizeTime)
             .join(':');
 
         return (
             <HeaderWithOClock>
                 <HeaderText>Welcome!</HeaderText>
-                <TimeDisplay title="Live o'clock: " value={date} timer={false}/>
+                <TimeDisplay title="Live o'clock: "
+                             value={date}
+                             timer={false}/>
             </HeaderWithOClock>
         )
     }

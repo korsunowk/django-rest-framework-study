@@ -114,13 +114,18 @@ class CounterBlock extends React.Component {
 
     render () {
         let state = this.state;
-        let timer = [state.hours, state.minutes, state.seconds, state.milseconds].join(':');
+        let timer = [state.hours, state.minutes,
+                     state.seconds, state.milseconds].join(':');
 
         return (
             <BlockCounter>
                 <Counter counter={this.props.counter}/>
-                <ApiButton title="Timer Button" button_type="time-button" onClick={this.handleTimeButtonClick}/>
-                <TimeDisplay title="Timer: " value={timer} timer={true}/>
+                <ApiButton title="Timer Button"
+                           button_type="time-button"
+                           onClick={this.handleTimeButtonClick}/>
+                <TimeDisplay title="Timer: "
+                             value={timer}
+                             timer={true}/>
                 <Watch start={state.watch_start}/>
             </BlockCounter>
         )

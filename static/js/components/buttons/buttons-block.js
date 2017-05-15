@@ -9,11 +9,21 @@ import styled from 'styled-components';
 function BlockButtons (props) {
     return (
         <ButtonsBlock>
-            <ApiButton title='*5' href="/" button_type="counter" onClick={props.mul}/>
-            <ApiButton title='+1' href="/" onClick={props.inc}/>
-            <ApiButton title='Clear' href="/" onClick={props.clear}/>
-            <ApiButton title='-1' href="/" onClick={props.dec}/>
-            <ApiButton title='/5' href="/" onClick={props.dev}/>
+            <ApiButton title='*5' href="/"
+                       button_type="counter"
+                       onClick={props.mul}/>
+            <ApiButton title='+1'
+                       href="/"
+                       onClick={props.inc}/>
+            <ApiButton title='Clear'
+                       href="/"
+                       onClick={props.clear}/>
+            <ApiButton title='-1'
+                       href="/"
+                       onClick={props.dec}/>
+            <ApiButton title='/5'
+                       href="/"
+                       onClick={props.dev}/>
         </ButtonsBlock>
     )
 }

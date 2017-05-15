@@ -11,8 +11,6 @@ import BlockButtons from './components/buttons/buttons-block'
 import BlockCounter from './components/counter/block-counter'
 import WheelWithRange from './components/colored-wheel/wheel-with-range'
 
-var styles = require('../sass/main.scss');
-
 
 class Main extends React.Component {
     constructor(props) {

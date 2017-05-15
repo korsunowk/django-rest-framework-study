@@ -16,14 +16,9 @@ module.exports = {
                     presets: ['react']
                 }
             },
-            {
-                test:/\.scss$/,
-                use:ExtractTextPlugin.extract({fallback:"style-loader",use:["css-loader","sass-loader"]}),
-            },
         ]
     },
     plugins: [
-        new ExtractTextPlugin({filename: 'public/styles.css', allChunks: true, disable: false}),
         new LiveReloadPlugin()
     ]
 };

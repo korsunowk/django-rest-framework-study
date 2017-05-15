@@ -2,6 +2,7 @@
  * Created by base on 11.05.17.
  */
 import React from 'react';
+import styled from 'styled-components';
 
 class OneWheelLine extends React.Component {
     constructor (props) {
@@ -58,18 +59,28 @@ class OneWheelLine extends React.Component {
     }
     render () {
         return (
-                <div
+                <ColoredLine
                     id={this.props.id}
-                    className={this.props.className}
+                    color={this.props.color}
                     style={{transform: "rotate(" + this.state.value + 'deg)'}}
                     onClick={this.toggleRotate}
                     key={this.props.key} >
-                </div>
+                </ColoredLine>
         )
     }
     componentDidMount () {
         this.toggleRotate();
     }
 }
+
+
+const ColoredLine = styled.div`
+    width: 4px;
+    height: 300px;
+    position: absolute;
+    cursor: pointer;
+    background-color: ${(props) => props.color};
+  `;
+
 
 export default OneWheelLine;

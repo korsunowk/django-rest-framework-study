@@ -2,6 +2,8 @@
  * Created by base on 11.05.17.
  */
 import React from 'react';
+import styled from 'styled-components';
+
 import OneWheelLine from './line-in-wheel'
 
 
@@ -17,27 +19,21 @@ class Wheel extends React.Component {
             lightblue: 5,
             blue: 6,
             purple: 7,
+            black: 8,
             stop: false
         };
-        this.toogleHaos = this.toogleHaos.bind(this);
-    }
-
-    toogleHaos(e) {
-        if (e.target.className == 'simple-watch')
-        {
-            this.setState({
-                stop: !this.state.stop
-            })
-        }
     }
     render () {
-        let colors = ["red", "yellow", "orange", "green", "lightblue", "blue", "purple"];
+        let colors = [
+            "red", "yellow", "orange",
+            "green", "lightblue", "blue",
+            "purple", "black"];
         let lines = [];
         for(let i=0; i< colors.length; i++){
             lines.push(
                 <OneWheelLine
                     id={colors[i]}
-                    className={"simple-watch__" + colors[i]}
+                    color={colors[i]}
                     rotate={this.state[colors[i]]}
                     key={i}
                     stop={this.state.stop}
@@ -46,16 +42,39 @@ class Wheel extends React.Component {
             )
         }
         return (
-            <div className="block-watch">
-                <div className="simple-watch" onClick={this.toogleHaos}>
-                    <div className="simple-watch__center">
+            <WheelBlock>
+                <SimpleWheel>
+                    <WheelCenter>
 
-                    </div>
+                    </WheelCenter>
                     {lines}
-                </div>
-            </div>
+                </SimpleWheel>
+            </WheelBlock>
         )
     }
 }
+
+const WheelCenter = styled.div`
+    background-color: black;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+`;
+
+const SimpleWheel = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 3px solid black;
+    width: 300px;
+    height: 300px;
+`;
+
+const WheelBlock = styled.div`
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+`;
 
 export default Wheel;

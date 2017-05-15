@@ -63,8 +63,7 @@ class OneWheelLine extends React.Component {
                     id={this.props.id}
                     color={this.props.color}
                     style={{transform: "rotate(" + this.state.value + 'deg)'}}
-                    onClick={this.toggleRotate}
-                    key={this.props.key} >
+                    onClick={this.toggleRotate}>
                 </ColoredLine>
         )
     }

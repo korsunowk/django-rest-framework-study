@@ -2,7 +2,7 @@
 
 На данный момент в проекте: 
 ===========================
- Django rest framework: 
+ Django REST Framework: 
  ---
 - _пермишены;_ 
 - _**unit**-тесты;_

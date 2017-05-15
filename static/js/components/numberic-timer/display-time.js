@@ -24,7 +24,14 @@ const StyledTimer = styled.span`
   `;
 
 function TimeDisplay (props) {
-    let span = props.timer ? <StyledTimer>{props.title} {props.value}</StyledTimer> : <StyledOclock> {props.title} {props.value} </StyledOclock>;
+    let span = props.timer ?
+        <StyledTimer>
+            {props.title} {props.value}
+        </StyledTimer> :
+        <StyledOclock>
+            {props.title} {props.value}
+        </StyledOclock>;
+
     return span;
 }
 

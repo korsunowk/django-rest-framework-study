@@ -20,6 +20,10 @@ class Wheel extends React.Component {
             blue: 6,
             purple: 7,
             black: 8,
+            gray: 9,
+            aqua: 10,
+            bisque: 11,
+            lime: 12,
             stop: false
         };
     }
@@ -27,7 +31,8 @@ class Wheel extends React.Component {
         let colors = [
             "red", "yellow", "orange",
             "green", "lightblue", "blue",
-            "purple", "black"];
+            "purple", "black", "gray",
+            "aqua", "bisque", "lime"];
         let lines = [];
         for(let i=0; i< colors.length; i++){
             lines.push(

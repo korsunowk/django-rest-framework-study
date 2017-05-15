@@ -30,27 +30,25 @@ let CountButton = styled(buttons_style)`
       border: 2px solid green;
   `;
 
-class ApiButton extends React.Component {
-    render () {
-        let OneButton = null;
+function ApiButton (props) {
+    let OneButton = null;
 
-        switch (this.props.button_type) {
-            case "time-button": {
-                OneButton = TimeButton;
-                break;
-            }
-            default : {
-                OneButton = CountButton;
-                break;
-            }
+    switch (props.button_type) {
+        case "time-button": {
+            OneButton = TimeButton;
+            break;
         }
-
-        return (
-            <OneButton href={this.props.href} onClick={this.props.onClick}>
-                {this.props.title}
-            </OneButton>
-        )
+        default : {
+            OneButton = CountButton;
+            break;
+        }
     }
+
+    return (
+        <OneButton href={props.href} onClick={props.onClick}>
+            {props.title}
+        </OneButton>
+    )
 }
 
 export default ApiButton;

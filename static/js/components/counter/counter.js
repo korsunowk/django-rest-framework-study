@@ -11,12 +11,10 @@ const SpanCounter = styled.span`
     font-size: 30px;  
   `;
 
-class Counter extends React.Component {
-    render () {
-        return (
-            <SpanCounter>Counter: {this.props.counter}</SpanCounter>
-        )
-    }
+function Counter (props) {
+    return (
+        <SpanCounter>Counter: {props.counter}</SpanCounter>
+    )
 }
 
 export default Counter;

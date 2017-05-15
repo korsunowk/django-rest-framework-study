@@ -23,11 +23,9 @@ const StyledTimer = styled.span`
       padding-right: 50px;
   `;
 
-class TimeDisplay extends React.Component {
-    render () {
-        let span = this.props.timer? <StyledTimer>{this.props.title} {this.props.value}</StyledTimer> : <StyledOclock> {this.props.title} {this.props.value} </StyledOclock>;
-        return span;
-    }
+function TimeDisplay (props) {
+    let span = props.timer ? <StyledTimer>{props.title} {props.value}</StyledTimer> : <StyledOclock> {props.title} {props.value} </StyledOclock>;
+    return span;
 }
 
 export default TimeDisplay;

@@ -4,7 +4,8 @@ var webpack = require('webpack');
 process.env.NODE_ENV = 'development';
 
 module.exports = {
-    entry: "./js/app.js",
+    entry:
+        "./js/app.js",
     output: {
         filename: "public/bundle.js"
     },

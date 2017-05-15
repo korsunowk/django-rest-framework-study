@@ -3,8 +3,8 @@
  */
 
 import React from 'react';
-import SimpleWatch from './simple-watch'
-import WheelRange from './range-input-for-wheel'
+import Wheel from './wheel/wheel'
+import WheelRange from './range-for-wheel/range-input-for-wheel'
 
 class WheelWithRange extends React.Component {
     constructor () {
@@ -22,7 +22,7 @@ class WheelWithRange extends React.Component {
     render () {
         return (
             <div className="wheel-with-range">
-                <SimpleWatch speed={this.state.range} />
+                <Wheel speed={this.state.range} />
                 <WheelRange onChange={this.handlerChangeRange} />
             </div>
         )

@@ -4,9 +4,9 @@
 import React from 'react';
 
 import Counter from './counter'
-import TimeButton from './buttons/one-button'
-import TimeDisplay from './display-time'
-import Watch from './watch/watch'
+import TimeButton from '../buttons/one-button'
+import TimeDisplay from '../numberic-timer/display-time'
+import Watch from '../watch/watch'
 
 
 class CounterBlock extends React.Component {

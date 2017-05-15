@@ -7,8 +7,8 @@ import ReactDOM from 'react-dom';
 
 import PageHeader from './components/page-header'
 import BlockButtons from './components/buttons/buttons-block'
-import BlockCounter from './components/block-counter'
-import WheelWithRange from './components/wheel-with-range'
+import BlockCounter from './components/counter/block-counter'
+import WheelWithRange from './components/colored-wheel/wheel-with-range'
 
 var styles = require('../sass/main.scss');
 

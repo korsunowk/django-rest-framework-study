@@ -5,7 +5,7 @@ import React from 'react';
 import OneWheelLine from './line-in-wheel'
 
 
-class SimpleWatch extends React.Component {
+class Wheel extends React.Component {
     constructor (props) {
         super(props);
 
@@ -58,4 +58,4 @@ class SimpleWatch extends React.Component {
     }
 }
 
-export default SimpleWatch;
+export default Wheel;

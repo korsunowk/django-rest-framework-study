@@ -2,7 +2,7 @@
  * Created by base on 10.05.17.
  */
 import React from 'react';
-import TimeDisplay from './display-time';
+import TimeDisplay from './numberic-timer/display-time';
 
 function normalizeTime(time) {
     return time.toString().length == 2 ? time : '0' + time

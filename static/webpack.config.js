@@ -1,5 +1,4 @@
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var LiveReloadPlugin = require('webpack-livereload-plugin');
 
 process.env.NODE_ENV = 'development';
 
@@ -24,7 +23,4 @@ module.exports = {
         }
         ]
     },
-    plugins: [
-        new LiveReloadPlugin()
-    ]
 };

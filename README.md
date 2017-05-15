@@ -15,6 +15,7 @@ Other
 - _подключен **ReactJS**;_
 - _подключен и настроен **webpack** с **livereload** + **SASS**;_
 - _подключен **styled-components**;_
+- _в процессе подключения **Hot Module Replacement**;_
 
  ReactJS
  ---

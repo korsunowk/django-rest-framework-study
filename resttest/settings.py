@@ -38,6 +38,7 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     'rest_framework',  # Django rest framework
     'rest_framework_recursive',  # Recursive fields for DRF serializers
+    'webpack_loader'  # django library for webpack
 ]
 
 # Apps specific for this project go here.
@@ -141,3 +142,10 @@ REST_FRAMEWORK = {
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'bundles/',
+        'STATS_FILE': os.path.join(BASE_DIR, 'static/webpack-stats.json'),
+    }
+}

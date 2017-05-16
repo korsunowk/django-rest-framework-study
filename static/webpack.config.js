@@ -1,13 +1,20 @@
 // var LiveReloadPlugin = require('webpack-livereload-plugin');
 var webpack = require('webpack');
+var path = require("path");
+var BundleTracker = require('webpack-bundle-tracker');
 
 process.env.NODE_ENV = 'development';
 
 module.exports = {
-    entry:
+    entry:[
+        'webpack-dev-server/client?http://localhost:3000',
+        'webpack/hot/only-dev-server',
         "./js/app.js",
+    ],
     output: {
-        filename: "public/bundle.js"
+        path: path.resolve('./bundles/'),
+        filename: "[name]-[hash].js",
+        publicPath: 'http://localhost:3000/bundles/',
     },
     module: {
         rules: [
@@ -18,18 +25,21 @@ module.exports = {
               loader: 'eslint-loader'
             },
         ],
-         loaders: [{
-              test: /\.js$/,
-              exclude: /node_modules/,
-              loader: "babel",
-              include: __dirname,
-              query: {
-                presets: [ 'es2015', 'react', 'react-hmre' ]
-              }
-        }]
+         loaders: [
+            {
+                test: /\.jsx?$/,
+                exclude: /node_modules/,
+                loaders: ['react-hot', 'babel'],
+            },
+        ],
+    },
+    devServer: {
+       headers: { "Access-Control-Allow-Origin": "http://127.0.0.1:8000" }
     },
     plugins: [
     //     new LiveReloadPlugin()
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoErrorsPlugin(),
+        new BundleTracker({filename: './webpack-stats.json'}),
     ]
 };

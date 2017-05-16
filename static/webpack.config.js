@@ -1,4 +1,3 @@
-// var LiveReloadPlugin = require('webpack-livereload-plugin');
 var webpack = require('webpack');
 var path = require("path");
 var BundleTracker = require('webpack-bundle-tracker');
@@ -37,7 +36,6 @@ module.exports = {
        headers: { "Access-Control-Allow-Origin": "http://127.0.0.1:8000" }
     },
     plugins: [
-    //     new LiveReloadPlugin()
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
         new BundleTracker({filename: './webpack-stats.json'}),

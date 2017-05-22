@@ -10,7 +10,7 @@ function WheelRange(props) {
             <span>
                 Speed:
             </span>
-            <input
+            <RangeInput
                 onChange={props.onChange}
                 type="range"
                 min="1"
@@ -19,6 +19,10 @@ function WheelRange(props) {
         </WheelBlock>
     )
 }
+
+const RangeInput = styled.input`
+    
+  `;
 
 const WheelBlock = styled.div`
     padding-left: 50px;

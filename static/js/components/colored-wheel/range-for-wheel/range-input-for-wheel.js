@@ -10,7 +10,7 @@ function WheelRange(props) {
             <span>
                 Speed:
             </span>
-            <RangeInput
+            <input
                 onChange={props.onChange}
                 type="range"
                 min="1"

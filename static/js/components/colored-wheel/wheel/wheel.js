@@ -68,7 +68,10 @@ class Wheel extends React.Component {
 }
 
 Wheel.propTypes = {
-    speed: PropTypes.number
+    speed: PropTypes.oneOfType([
+        PropTypes.string.isRequired,
+        PropTypes.number.isRequired
+    ])
 };
 
 const WheelCenter = styled.div`

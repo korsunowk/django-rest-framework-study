@@ -78,7 +78,10 @@ class OneWheelLine extends React.Component {
 OneWheelLine.propTypes = {
     id: PropTypes.string,
     color: PropTypes.string,
-    speed: PropTypes.number,
+    speed: PropTypes.oneOfType([
+        PropTypes.number.isRequired,
+        PropTypes.string.isRequired
+    ]),
     rotate: PropTypes.number
 };
 

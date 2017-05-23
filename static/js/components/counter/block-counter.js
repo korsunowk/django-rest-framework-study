@@ -134,7 +134,7 @@ class CounterBlock extends React.Component {
 }
 
 CounterBlock.propTypes = {
-    counter: PropTypes.number
+    counter: PropTypes.number.isRequired
 };
 
 const BlockCounter = styled.div`

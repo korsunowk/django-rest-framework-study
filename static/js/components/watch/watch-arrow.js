@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import styled from 'styled-components';
-
+import PropTypes from 'prop-types';
 
 class WatchArrow extends React.Component {
     constructor() {
@@ -78,6 +78,12 @@ class WatchArrow extends React.Component {
         this.start()
     }
 }
+
+WatchArrow.propTypes = {
+    type: PropTypes.string.isRequired,
+    delay: PropTypes.number.isRequired,
+    start: PropTypes.bool.isRequired
+};
 
 const ColoredArrow = styled.div`
     background-color: black;

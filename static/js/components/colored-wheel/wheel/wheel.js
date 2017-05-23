@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import OneWheelLine from './line-in-wheel'
 
@@ -65,6 +66,10 @@ class Wheel extends React.Component {
         )
     }
 }
+
+Wheel.propTypes = {
+    speed: PropTypes.number
+};
 
 const WheelCenter = styled.div`
     background-color: black;

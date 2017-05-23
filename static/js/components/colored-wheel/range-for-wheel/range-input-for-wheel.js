@@ -20,10 +20,6 @@ function WheelRange(props) {
     )
 }
 
-const RangeInput = styled.input`
-    
-  `;
-
 const WheelBlock = styled.div`
     padding-left: 50px;
   `;

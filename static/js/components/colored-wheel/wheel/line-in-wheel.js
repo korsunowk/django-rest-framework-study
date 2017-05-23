@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 class OneWheelLine extends React.Component {
     constructor (props) {
@@ -74,6 +75,12 @@ class OneWheelLine extends React.Component {
     }
 }
 
+OneWheelLine.propTypes = {
+    id: PropTypes.string,
+    color: PropTypes.string,
+    speed: PropTypes.number,
+    rotate: PropTypes.number
+};
 
 const ColoredLine = styled.div`
     width: 4px;

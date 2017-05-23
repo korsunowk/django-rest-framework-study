@@ -2,6 +2,7 @@
  * Created by base on 11.05.17.
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Counter from './counter'
 import ApiButton from '../buttons/one-button'
@@ -131,6 +132,10 @@ class CounterBlock extends React.Component {
         )
     }
 }
+
+CounterBlock.propTypes = {
+    counter: PropTypes.number
+};
 
 const BlockCounter = styled.div`
     display: flex;

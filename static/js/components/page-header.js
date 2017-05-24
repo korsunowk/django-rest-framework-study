@@ -5,7 +5,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 import TimeDisplay from './numberic-timer/display-time';
-import CanvasWatch from './canvas-watch/canvas-watch';
 
 
 function normalizeTime(time) {
@@ -46,7 +45,6 @@ class PageHeader extends React.Component {
 
         return (
             <HeaderWithOClock>
-                <CanvasWatch />
                 <HeaderText>Welcome!</HeaderText>
                 <TimeDisplay title="Live o'clock: "
                              value={date}

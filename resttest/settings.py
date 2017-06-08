@@ -38,7 +38,8 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     'rest_framework',  # Django rest framework
     'rest_framework_recursive',  # Recursive fields for DRF serializers
-    'webpack_loader'  # django library for webpack
+    'webpack_loader',  # django library for webpack
+    'corsheaders'
 ]
 
 # Apps specific for this project go here.
@@ -53,6 +54,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -149,3 +151,6 @@ WEBPACK_LOADER = {
         'STATS_FILE': os.path.join(BASE_DIR, 'static/webpack-stats.json'),
     }
 }
+
+
+CORS_ORIGIN_ALLOW_ALL = True

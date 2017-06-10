@@ -28,5 +28,15 @@
       "subject": 3,
       "date": "2017-04-27"
     }
+  },
+  {
+    "model": "api.Comment",
+    "pk": 4,
+    "fields": {
+      "text": "Middleware comment",
+      "user": 2,
+      "subject": 3,
+      "date": "2017-04-27"
+    }
   }
 ]
